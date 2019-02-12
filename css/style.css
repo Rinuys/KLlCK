@@ -6,12 +6,12 @@
 body {
   padding: 1em;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  color: #b9b9b9;
+  font-size: 17px;
+  color: #007bff ;
   background-color: #e3e3e3;
 }
 h4 {
-  color: #7ed321;
+  color: #007bff;
 }
 input,
 input[type="radio"] + label,
@@ -32,7 +32,7 @@ select {
 }
 input:focus {
   outline: 0;
-  border-color: #64ac15;
+  border-color: #007bff;
 }
 input:focus + .input-icon i {
   color: #7ed321;
@@ -66,9 +66,9 @@ input[type="radio"]:checked + label,
 input:checked + label:before,
 select:focus,
 select:active {
-  background-color: #7ed321;
+  background-color: #007bff;
   color: #fff;
-  border-color: #64ac15;
+  border-color: #007bff;
 }
 input[type="checkbox"] {
   display: none;
@@ -211,3 +211,4 @@ select option {
     padding-right: 0;
   }
 }
+
