@@ -1,14 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
-  <meta charset="utf-8">
+ <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Modern Business - Start Bootstrap Template</title>
+  <title>KLlCK</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,35 +19,33 @@
   <style>
   </style>
 </head>
-
 <body>
-
-  <!-- Navigation -->
+<!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
     <div class="container">
-      <a class="navbar-brand logo" href="index.html">KLlCK</a>
+      <a class="navbar-brand logo" href="index.jsp">KLlCK</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="class-evaluate.html">ê°•ì˜í‰</a>
+            <a class="nav-link" href="class-evaluate.jsp">°­ÀÇÆò</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="reports.html">ì¡±ë³´ / ë ˆí¬íŠ¸</a>
+            <a class="nav-link" href="reports.jsp">Á·º¸ / ·¹Æ÷Æ®</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="board.html">ê²Œì‹œíŒ</a>
+            <a class="nav-link" href="board.jsp">°Ô½ÃÆÇ</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               MY Page
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="my-status.html">ë‚´ ì •ë³´</a>
-              <a class="dropdown-item" href="status-modify.html">ë‚´ ì •ë³´ ë³€ê²½</a>
-              <a class="dropdown-item" href="subscribe.html">êµ¬ë… ë‚´ì—­</a>
+              <a class="dropdown-item" href="my-status.jsp">³» Á¤º¸</a>
+              <a class="dropdown-item" href="status-modify.jsp">³» Á¤º¸ º¯°æ</a>
+              <a class="dropdown-item" href="subscribe.jsp">±¸µ¶ ³»¿ª</a>
             </div>
           </li>
         </ul>
@@ -82,40 +80,40 @@
   <!-- Page Content -->
   <div class="container">
 
-    <h1 class="my-4">ìµœì‹  ê°•ì˜í‰</h1>
+    <h1 class="my-4">ÃÖ½Å °­ÀÇÆò</h1>
 
     <!-- Marketing Icons Section -->
     <div class="row">
       <div class="col-lg-4 mb-4">
         <div class="card h-100">
-          <h4 class="card-header">ëŒ€í•™ì˜ì–´(W): í•˜ì§€í˜œ</h4>
+          <h4 class="card-header">´ëÇĞ¿µ¾î(W): ÇÏÁöÇı</h4>
           <div class="card-body">
-            <p class="card-text">êµìˆ˜ë‹˜ì€ ì¹œì ˆí•˜ì‹œê³  ì¢‹ìœ¼ì‹ ë° ì¤‘ê°„ê³ ì‚¬ ì—†ëŠ” ëŒ€ì‹  í€´ì¦ˆ ëª‡ë²ˆ ë³´ê³  ì—ì„¸ì´ ì‘ì„±í•˜ëŠ” ê³¼ì œëŠ” ìì£¼ ìˆìŠµë‹ˆë‹¤.</p>
+            <p class="card-text">±³¼ö´ÔÀº Ä£ÀıÇÏ½Ã°í ÁÁÀ¸½Åµ¥ Áß°£°í»ç ¾ø´Â ´ë½Å ÄûÁî ¸î¹ø º¸°í ¿¡¼¼ÀÌ ÀÛ¼ºÇÏ´Â °úÁ¦´Â ÀÚÁÖ ÀÖ½À´Ï´Ù.</p>
           </div>
           <div class="card-footer">
-            <a href="reports.html" class="btn btn-primary">ë‹¤ë¥¸ ê°•ì˜í‰ ë³´ê¸°</a>
+            <a href="reports.jsp" class="btn btn-primary">´Ù¸¥ °­ÀÇÆò º¸±â</a>
           </div>
         </div>
       </div>
       <div class="col-lg-4 mb-4">
         <div class="card h-100">
-          <h4 class="card-header">ìŠ¤í˜ì¸ì–´: ë°•ìˆ™í¬</h4>
+          <h4 class="card-header">½ºÆäÀÎ¾î: ¹Ú¼÷Èñ</h4>
           <div class="card-body">
-            <p class="card-text">ì—„ì²­ ì—´ì •ì ì´ì‹  êµìˆ˜ë‹˜. ì•½ê°„ ê³ ë“±í•™êµì‹ ìˆ˜ì—…? ì§ì ‘ ë§í•˜ê³  ì ìœ¼ë¼ëŠ” ê±° ì ê³  ì°¸ì—¬ ì•ˆí•  ìˆ˜ ì—†ëŠ” ìˆ˜ì—…ì´ë‹¤.</p>
+            <p class="card-text">¾öÃ» ¿­Á¤ÀûÀÌ½Å ±³¼ö´Ô. ¾à°£ °íµîÇĞ±³½Ä ¼ö¾÷? Á÷Á¢ ¸»ÇÏ°í ÀûÀ¸¶ó´Â °Å Àû°í Âü¿© ¾ÈÇÒ ¼ö ¾ø´Â ¼ö¾÷ÀÌ´Ù.</p>
           </div>
           <div class="card-footer">
-            <a href="reports.html" class="btn btn-primary">ë‹¤ë¥¸ ê°•ì˜í‰ ë³´ê¸°</a>
+            <a href="reports.jsp" class="btn btn-primary">´Ù¸¥ °­ÀÇÆò º¸±â</a>
           </div>
         </div>
       </div>
       <div class="col-lg-4 mb-4">
         <div class="card h-100">
-          <h4 class="card-header">ë™ì–‘ë¬¸í™”ì˜ì‚¬ì ì´í•´: ì´ì™„ì„</h4>
+          <h4 class="card-header">µ¿¾ç¹®È­ÀÇ»çÀûÀÌÇØ: ÀÌ¿Ï¼®</h4>
           <div class="card-body">
-            <p class="card-text">êµìˆ˜ë‹˜ì´ êµ‰ì¥íˆ ê´€ëŒ€í•˜ì‹­ë‹ˆë‹¤. ë”´ì§“, ì¶œíŠ€ ë‹¤ ì‹ ê²½ ì•ˆ ì“°ì‹œê³ ìš”.</p>
+            <p class="card-text">±³¼ö´ÔÀÌ ±²ÀåÈ÷ °ü´ëÇÏ½Ê´Ï´Ù. µıÁş, ÃâÆ¢ ´Ù ½Å°æ ¾È ¾²½Ã°í¿ä.</p>
           </div>
           <div class="card-footer">
-            <a href="reports.html" class="btn btn-primary">ë‹¤ë¥¸ ê°•ì˜í‰ ë³´ê¸°</a>
+            <a href="reports.jsp" class="btn btn-primary">´Ù¸¥ °­ÀÇÆò º¸±â</a>
           </div>
         </div>
       </div>
@@ -123,17 +121,17 @@
     <!-- /.row -->
 
     <!-- Portfolio Section -->
-    <br><br><h2>Hot ê²Œì‹œë¬¼</h2><br>
+    <br><br><h2>Hot °Ô½Ã¹°</h2><br>
 
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
           <div class="card-header">
-              <a href="#"><img class="board-profile" src="http://www.localsegye.co.kr/news/data/20181016/p1065594974453059_805_thum.jpg" alt=""><span>ë‹‰ë„¤ì„</span></a>
+              <a href="#"><img class="board-profile" src="http://www.localsegye.co.kr/news/data/20181016/p1065594974453059_805_thum.jpg" alt=""><span>´Ğ³×ÀÓ</span></a>
           </div>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">ê¸€ ì œëª©</a>
+              <a href="#">±Û Á¦¸ñ</a>
             </h4>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
           </div>
@@ -142,11 +140,11 @@
       <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
             <div class="card-header">
-                <a href="#"><img class="board-profile" src="http://www.localsegye.co.kr/news/data/20181016/p1065594974453059_805_thum.jpg" alt=""><span>ë‹‰ë„¤ì„</span></a>
+                <a href="#"><img class="board-profile" src="http://www.localsegye.co.kr/news/data/20181016/p1065594974453059_805_thum.jpg" alt=""><span>´Ğ³×ÀÓ</span></a>
             </div>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">ê¸€ ì œëª©</a>
+                <a href="#">±Û Á¦¸ñ</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
             </div>
@@ -172,7 +170,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-uos">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+      <p class="m-0 text-center text-white">Copyright &copy; 2019 by KLlCK</p>
     </div>
     <!-- /.container -->
   </footer>
@@ -182,5 +180,4 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>

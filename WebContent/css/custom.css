@@ -62,3 +62,6 @@
     width: 30px;
     margin-right: 10px;
   }
+header { background-color:white; height: 300px; }
+main { min-height:100vh; }
+footer { background-color:white; height: 150px; }

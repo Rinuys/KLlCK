@@ -1,9 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -17,6 +17,7 @@
   <link href="css/modern-business.css" rel="stylesheet">
   <link href="css/custom.css" rel="stylesheet">
   <style>
+  
     .notice{
       justify-content: center;
       align-items: flex-start;
@@ -46,35 +47,33 @@
     }
   </style>
 </head>
-
 <body>
-
-  <!-- Navigation -->
+ <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
     <div class="container">
-      <a class="navbar-brand logo" href="index.html">KLlCK</a>
+      <a class="navbar-brand logo" href="index.jsp">KLlCK</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-              <a class="nav-link" href="class-evaluate.html">ê°•ì˜í‰</a>
+              <a class="nav-link" href="class-evaluate.jsp">°­ÀÇÆò</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="reports.html">ì¡±ë³´ / ë ˆí¬íŠ¸</a>
+              <a class="nav-link" href="reports.jsp">Á·º¸ / ·¹Æ÷Æ®</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="board.html">ê²Œì‹œíŒ</a>
+            <a class="nav-link" href="board.jsp">°Ô½ÃÆÇ</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               MY Page
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="my-status.html">ë‚´ ì •ë³´</a>
-              <a class="dropdown-item" href="status-modify.html">ë‚´ ì •ë³´ ë³€ê²½</a>
-              <a class="dropdown-item" href="subscribe.html">êµ¬ë… ë‚´ì—­</a>
+              <a class="dropdown-item" href="my-status.jsp">³» Á¤º¸</a>
+              <a class="dropdown-item" href="status-modify.jsp">³» Á¤º¸ º¯°æ</a>
+              <a class="dropdown-item" href="subscribe.jsp">±¸µ¶ ³»¿ª</a>
             </div>
           </li>
         </ul>
@@ -88,21 +87,21 @@
     <!-- Page Heading/Breadcrumbs -->
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html">ê³µì§€ì‚¬í•­</a>
+        <a href="index.jsp">°øÁö»çÇ×</a>
       </li>
     </ol>
 
     <!-- Intro Content -->
     <div class="row">
       <div class="notice">
-        <h2>ê³µì§€ì‚¬í•­1</h2>
+        <h2>°øÁö»çÇ×1</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed voluptate nihil eum consectetur similique? Consectetur, quod, incidunt, harum nisi dolores delectus reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat.</p>
         <hr>
       </div>
     </div>
     <div class="row">
         <div class="notice">
-          <h2>ê³µì§€ì‚¬í•­2</h2>
+          <h2>°øÁö»çÇ×2</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed voluptate nihil eum consectetur similique? Consectetur, quod, incidunt, harum nisi dolores delectus reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat.</p>
           <hr>
         </div>
@@ -112,10 +111,61 @@
     <!-- Team Members -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">ììœ ê²Œì‹œíŒ</a>
+          <a href="index.jsp">ÀÚÀ¯°Ô½ÃÆÇ</a>
         </li>
       </ol>
-
+	<form method="get" action="./index.jsp" class="form-inline mt-3">
+				<select name="Divide" class="form-control ml-2">
+					<option value="devideTime" selected>ÃÖ½Å¼ø</option>
+					<option value="devideLike">ÃßÃµ¼ø</option>
+				</select>
+				<input type="text" name="search" class="form-control " placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
+				<button type="submit" class="btn btn-primary mt-3 mb-3">°Ë»ö</button>
+		</form>
+		<!-- ÀÚÀ¯°Ô½ÃÆÇ ±Û¾²±â ¸ğ´Ş -->
+		<a class="btn btn-primary mx-1 ml-1 mb-2 mt-2" data-toggle="modal" href="#freeRegisterModal">µî·ÏÇÏ±â</a>
+		<br>
+		
+		
+		
+		
+		<div class="modal fade" id="freeRegisterModal" tabindex="-1" role="dialog" area-labelledby="modal" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+				<!-- ¸ğ´ŞÇì´õ -->
+					<div class="modal-header">
+						<h5 class="modal-title" id="modal">ÀÚÀ¯°Ô½ÃÆÇ ±Û¾²±â</h5>
+						<button type="button" class="close" data-dismiss="modal" area-label="Close">
+							<span area-hidden="true">&times;</span>
+						</button>	
+					</div>
+				<!-- ¸ğ´Ş ¹Ùµğ -->
+					<div class="modal-body">
+						<!-- freeBoardResgisterAction.jsp·Î ³Ñ°ÜÁÙformÅÂ±× -->
+						<form action"./freeBoardRegisterAction.jsp" method="post">
+							<div class="form-row">
+								<div class="form-group col-sm-10 ml-3">
+									<label>Á¦¸ñ</label>
+									<input type="text" name="freeBoardTitle" class="form-control" maxlength="20" placeholder="±ÛÁ¦¸ñ">
+								</div>
+								<div class="form-group col-sm-10 ml-3">
+									<label>±Û³»¿ë</label>
+									<textarea name="freeBoardTitle" class="form-control" style="height:300px" maxlength="2048" placeholder="±Û³»¿ë"></textarea>
+								</div>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-primary ml-1">µî·ÏÇÏ±â</button>
+									<button type="button" class="btn btn-secondary ml-1" data-dismiss="modal">´İ±â</button>						
+								</div>
+							</div>
+						</form>
+					
+					</div>
+				
+				</div>
+			</div>
+		</div>
+		
+		
     <div class="row">
       <div class="col-lg-4 mb-4">
         <div class="card h-100 text-center">
@@ -123,7 +173,7 @@
           <div class="card-body">
             <div class="card-body-top">
                 <img class="card-profile" src="http://artzone.indiecolaj.com/images/24/dp.jpg" alt="">
-                <div class="card-writer">ì‘ì„±ì</div>
+                <div class="card-writer">ÀÛ¼ºÀÚ</div>
             </div>
             <div class="card-body-main">
                 <p>Lorem ipsum dolor sit amet</p>
@@ -138,7 +188,7 @@
             <div class="card-body">
               <div class="card-body-top">
                   <img class="card-profile" src="http://artzone.indiecolaj.com/images/24/dp.jpg" alt="">
-                  <div class="card-writer">ì‘ì„±ì</div>
+                  <div class="card-writer">ÀÛ¼ºÀÚ</div>
               </div>
               <div class="card-body-main">
                   <p>Lorem ipsum dolor sit amet</p>
@@ -153,7 +203,7 @@
               <div class="card-body">
                 <div class="card-body-top">
                     <img class="card-profile" src="http://artzone.indiecolaj.com/images/24/dp.jpg" alt="">
-                    <div class="card-writer">ì‘ì„±ì</div>
+                    <div class="card-writer">ÀÛ¼ºÀÚ</div>
                 </div>
                 <div class="card-body-main">
                     <p>Lorem ipsum dolor sit amet</p>
@@ -169,7 +219,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-uos">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+      <p class="m-0 text-center text-white">Copyright &copy; 2019 by KLlCK</p>
     </div>
     <!-- /.container -->
   </footer>
@@ -179,5 +229,4 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>

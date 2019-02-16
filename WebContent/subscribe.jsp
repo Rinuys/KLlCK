@@ -1,6 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
-<html lang="en">
-
 <head>
 
   <meta charset="utf-8">
@@ -24,29 +24,29 @@
    <!-- Navigation -->
    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
     <div class="container">
-      <a class="navbar-brand logo" href="index.html">KLlCK</a>
+      <a class="navbar-brand logo" href="index.jsp">KLlCK</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-              <a class="nav-link" href="class-evaluate.html">Í∞ïÏùòÌèâ</a>
+              <a class="nav-link" href="class-evaluate.jsp">∞≠¿«∆Ú</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="reports.html">Ï°±Î≥¥ / Î†àÌè¨Ìä∏</a>
+              <a class="nav-link" href="reports.jsp">¡∑∫∏ / ∑π∆˜∆Æ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="board.html">Í≤åÏãúÌåê</a>
+            <a class="nav-link" href="board.jsp">∞‘Ω√∆«</a>
           </li>
           <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               MY Page
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="my-status.html">ÎÇ¥ Ï†ïÎ≥¥</a>
-              <a class="dropdown-item" href="status-modify.html">ÎÇ¥ Ï†ïÎ≥¥ Î≥ÄÍ≤Ω</a>
-              <a class="dropdown-item" href="subscribe.html">Íµ¨ÎèÖ ÎÇ¥Ïó≠</a>
+              <a class="dropdown-item" href="my-status.jsp">≥ª ¡§∫∏</a>
+              <a class="dropdown-item" href="status-modify.jsp">≥ª ¡§∫∏ ∫Ø∞Ê</a>
+              <a class="dropdown-item" href="subscribe.jsp">±∏µ∂ ≥ªø™</a>
              </div>
           </li>
         </ul>
@@ -69,9 +69,9 @@
       <!-- Sidebar Column -->
       <div class="col-lg-3 mb-4">
         <div class="list-group">
-          <a href="my-status.html" class="list-group-item">ÎÇ¥ Ï†ïÎ≥¥</a>
-          <a href="status-modify.html" class="list-group-item">ÎÇ¥ Ï†ïÎ≥¥ Î≥ÄÍ≤Ω</a>
-          <a href="subscribe.html" class="list-group-item">Íµ¨ÎèÖ ÎÇ¥Ïó≠</a>        
+            <a href="my-status.jsp" class="list-group-item">≥ª ¡§∫∏</a>
+            <a href="status-modify.jsp" class="list-group-item">≥ª ¡§∫∏ ∫Ø∞Ê</a>
+            <a href="subscribe.jsp" class="list-group-item">±∏µ∂ ≥ªø™</a>      
         </div>
       </div>
       <!-- Content Column -->
@@ -88,7 +88,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-uos">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+      <p class="m-0 text-center text-white">Copyright &copy; 2019 by KLlCK</p>
     </div>
     <!-- /.container -->
   </footer>
