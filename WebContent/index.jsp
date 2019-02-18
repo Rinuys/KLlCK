@@ -1,345 +1,214 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-<title>KLlCK</title>
+  <title>KLlCK</title>
 
-<!-- ºÎÆ®½ºÆ®·¦ cssÃß°¡ -->
-<link rel="stylesheet" href="./css/bootstrap.min.css">
-<!-- Ä¿½ºÅÒCSS -->
-<link href="css/modern-business.css" rel="stylesheet">
-<link href="css/custom.css" rel="stylesheet">
+    <!-- ë¶€íŠ¸ìŠ¤íŠ¸ëž© cssì¶”ê°€ -->
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+  <!-- ì»¤ìŠ¤í…€CSS -->
+  <link href="css/modern-business.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
 </head>
 <body>
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
-		<div class="container">
-			<a class="navbar-brand logo" href="index.jsp">KLlCK</a>
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link"
-						href="class-evaluate.jsp">°­ÀÇÆò</a></li>
-					<li class="nav-item"><a class="nav-link" href="reports.jsp">Á·º¸
-							/ ·¹Æ÷Æ®</a></li>
-					<li class="nav-item"><a class="nav-link" href="board.jsp">°Ô½ÃÆÇ</a>
-					</li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							MY Page </a>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="my-status.jsp">³» Á¤º¸</a> <a
-								class="dropdown-item" href="status-modify.jsp">³» Á¤º¸ º¯°æ</a> <a
-								class="dropdown-item" href="subscribe.jsp">±¸µ¶ ³»¿ª</a>
-						</div></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+<!-- ë¡œê·¸ì¸ ìœ ë¬´ í™•ì¸ -->
+<%
+	request.setCharacterEncoding("UTF-8");
+	String userID = null;
+	if(session.getAttribute("userID") != null){
+		userID = (String) session.getAttribute("userID");
+	}
+%>
 
-	<header>
-		<div id="carouselExampleIndicators" class="carousel slide"
-			data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0"
-					class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner" role="listbox">
-
-				<!-- Slide One - Set the background image for this slide in the line below -->
-				<div class="main-background"
-					style="background-image: url('http://rgb.45soft.com/image/1920x1080/ffffff.jpg')">
-					<div class="search">
-						<p class="logo-main">KLlCK</p>
-						<form action="">
-							<input class="search-form" type="text" placeholder="Search.....">
-							<input class="search-btn" type="submit" value="">
-						</form>
-					</div>
+<!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
+    <div class="container">
+      <a class="navbar-brand logo" href="index.jsp">KLlCK</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="class-evaluate.jsp">ê°•ì˜í‰</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reports.jsp">ì¡±ë³´ / ë ˆí¬íŠ¸</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="board.jsp">ê²Œì‹œíŒ</a>
+          </li>
+          <%
+          	if(userID == null){
+          		
+          %>
+          <li class="nav-item">
+            <a class="nav-link" href="login.jsp">ë¡œê·¸ì¸</a>
+          </li>
+          <li class="nav-item">
+          	<a class="nav-link" href="sign-up.jsp">íšŒì›ê°€ìž…</a>
+          </li>
+          <%
+          	}else{
+          %>
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						MY Page </a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+						<a class="dropdown-item" href="my-status.jsp">ë‚´ ì •ë³´</a> 
+						<a class="dropdown-item" href="status-modify.jsp">ë‚´ ì •ë³´ ë³€ê²½</a> 
+						<a class="dropdown-item" href="subscribe.jsp">êµ¬ë… ë‚´ì—­</a>
+						<a class="dropdown-item" href="userLogoutAction.jsp">ë¡œê·¸ì•„ì›ƒ</a>
 				</div>
-			</div>
+			</li>
+			<%
+          	}
+			%>
+			</ul>
 		</div>
-	</header>
+    </div>
+  </nav>
+
+  <header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        
+        <!-- Slide One - Set the background image for this slide in the line below -->
+        <div class="main-background" style="background-image: url('http://rgb.45soft.com/image/1920x1080/ffffff.jpg')">
+          <div class="search">
+            <p class="logo-main">KLlCK</p>
+            <form action="">
+                <input class="search-form" type="text" placeholder="Search.....">
+                <input class="search-btn" type="submit" value="">
+            </form>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </header>
 <body>
 	<section class="container">
 		<form method="get" action="./index.jsp" class="form-inline mt-3">
 			<select name="lectureDivide" class="form-control mx-1 mt-2">
-				<option value="ÀüÃ¼">ÀüÃ¼</option>
-				<option value="Àü°ø">Àü°ø</option>
-				<option value="±³¾ç">±³¾ç</option>
-				<option value="±âÅ¸">±âÅ¸</option>
-			</select> <input type="text" name="search" class="form-control mx-1 mt-2"
-				placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä">
-			<button type="submit" class="btn btn-primary mx-1 mt-2">°Ë»ö</button>
-			<a class="btn btn-primary mx-1 mt-2" data-toggle="modal"
-				href="#registerModal">µî·ÏÇÏ±â</a> <a class="btn btn-danger mx-1 mt-2"
-				data-toggle="modal" href="#reportModal">½Å°í</a>
+				<option value="ì „ì²´">ì „ì²´</option>
+				<option value="ì „ê³µ">ì „ê³µ</option>
+				<option value="êµì–‘">êµì–‘</option>
+				<option value="ê¸°íƒ€">ê¸°íƒ€</option>
+			</select>
+			<input type="text" name="search" class="form-control mx-1 mt-2" placeholder="ë‚´ìš©ì„ ìž…ë ¥í•˜ì„¸ìš”">
+			<button type="submit" class="btn btn-primary mx-1 mt-2">ê²€ìƒ‰</button>
+			<a class="btn btn-primary mx-1 mt-2" data-toggle="modal" href="#registerModal">ë“±ë¡í•˜ê¸°</a>
+			<a class="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#reportModal">ì‹ ê³ </a>
 		</form>
-		<div class="card bg-light mt-3">
-			<div class="card-header bg-light">
-				<div class="row">
-					<div class="col-8 text-left">
-						ÄÄÇ»ÅÍ°³·Ð&nbsp;<small>±èÇö¿ì</small>
-					</div>
-					<div class="col-4 text-right">
-						Á¾ÇÕ<span style="color: red;">A</span>
-					</div>
-				</div>
-			</div>
-			<div class="card-body">
-				<h5 class="card-title">
-					Á¤¸» ÁÁÀº °­ÀÇ¿¡¿ä.&nbsp;<small>(2017³â °¡À»ÇÐ±â)</small>
-				</h5>
-				<p class="card-text">°­ÀÇ°¡ ³Ê¹« ½¬¿ö¼­ ¹è¿î°Ô ¾ø½À´Ï´Ù.</p>
-				<div class="row">
-					<div class="col-9 text-left">
-						Á¾ÇÕ<span style="color: red;"">A</span> ¼ºÀû<span style="color: red;"">B</span>
-						°­ÀÇ·Â<span style="color: red;"">C</span> <span style="color: green;">(ÃßÃµ:15)</span>
-					</div>
-					<div class="col-3 text-right">
-						<a onclick="return confirm('ÃßÃµÇÏ½Ã°Ú½À´Ï±î?)"
-							href="./likeAction.jsp?evaluationID=">ÃßÃµ</a> <a
-							onclick="return confirm('»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?)"
-							href="./deleteAction.jsp?evaluationID=">»èÁ¦</a>
-					</div>
+	<div class="card bg-light mt-3">
+		<div class="card-header bg-light">
+			<div class="row">
+				<div class="col-8 text-left">ì»´í“¨í„°ê°œë¡ &nbsp;<small>ê¹€í˜„ìš°</small></div>
+				<div class="col-4 text-right">
+					ì¢…í•©<span style="color: red;">A</span>
 				</div>
 			</div>
 		</div>
-		<div class="card bg-light mt-3">
-			<div class="card-header bg-light">
-				<div class="row">
-					<div class="col-8 text-left">
-						ÄÄÇ»ÅÍÅë½Å&nbsp;<small>°­¼Ö</small>
-					</div>
-					<div class="col-4 text-right">
-						Á¾ÇÕ<span style="color: red;">A</span>
-					</div>
+		<div class="card-body">
+			<h5 class="card-title">
+				ì •ë§ ì¢‹ì€ ê°•ì˜ì—ìš”.&nbsp;<small>(2017ë…„ ê°€ì„í•™ê¸°)</small>
+			</h5>
+			<p class="card-text">ê°•ì˜ê°€ ë„ˆë¬´ ì‰¬ì›Œì„œ ë°°ìš´ê²Œ ì—†ìŠµë‹ˆë‹¤.</p>
+			<div class="row">
+				<div class="col-9 text-left">
+					ì¢…í•©<span style=color:red;">A</span>
+					ì„±ì <span style=color:red;">B</span>
+					ê°•ì˜ë ¥<span style=color:red;">C</span>
+					<span style="color:green;">(ì¶”ì²œ:15)</span>
 				</div>
-			</div>
-			<div class="card-body">
-				<h5 class="card-title">
-					Á¤¸» ÁÁÀº °­ÀÇ¿¡¿ä.&nbsp;<small>(2017³â °¡À»ÇÐ±â)</small>
-				</h5>
-				<p class="card-text">°­ÀÇ°¡ ³Ê¹« ½¬¿ö¼­ ¹è¿î°Ô ¾ø½À´Ï´Ù.</p>
-				<div class="row">
-					<div class="col-9 text-left">
-						Á¾ÇÕ<span style="color: red;"">A</span> ¼ºÀû<span style="color: red;"">B</span>
-						°­ÀÇ·Â<span style="color: red;"">C</span> <span style="color: green;">(ÃßÃµ:15)</span>
-					</div>
-					<div class="col-3 text-right">
-						<a onclick="return confirm('ÃßÃµÇÏ½Ã°Ú½À´Ï±î?)"
-							href="./likeAction.jsp?evaluationID=">ÃßÃµ</a> <a
-							onclick="return confirm('»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?)"
-							href="./deleteAction.jsp?evaluationID=">»èÁ¦</a>
-					</div>
+				<div class="col-3 text-right">
+					<a onclick="return confirm('ì¶”ì²œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?)" href="./likeAction.jsp?evaluationID=">ì¶”ì²œ</a>
+					<a onclick="return confirm('ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?)" href="./deleteAction.jsp?evaluationID=">ì‚­ì œ</a>
 				</div>
 			</div>
 		</div>
+	</div>
 		<div class="card bg-light mt-3">
-			<div class="card-header bg-light">
-				<div class="row">
-					<div class="col-8 text-left">
-						ÀÚ¹Ù&nbsp;<small>ÀÌÈ«¼®</small>
-					</div>
-					<div class="col-4 text-right">
-						Á¾ÇÕ<span style="color: red;">A</span>
-					</div>
-				</div>
-			</div>
-			<div class="card-body">
-				<h5 class="card-title">
-					Á¤¸» ÁÁÀº °­ÀÇ¿¡¿ä.&nbsp;<small>(2017³â °¡À»ÇÐ±â)</small>
-				</h5>
-				<p class="card-text">°­ÀÇ°¡ ³Ê¹« ½¬¿ö¼­ ¹è¿î°Ô ¾ø½À´Ï´Ù.</p>
-				<div class="row">
-					<div class="col-9 text-left">
-						Á¾ÇÕ<span style="color: red;"">A</span> ¼ºÀû<span style="color: red;"">B</span>
-						°­ÀÇ·Â<span style="color: red;"">C</span> <span style="color: green;">(ÃßÃµ:15)</span>
-					</div>
-					<div class="col-3 text-right">
-						<a onclick="return confirm('ÃßÃµÇÏ½Ã°Ú½À´Ï±î?)"
-							href="./likeAction.jsp?evaluationID=">ÃßÃµ</a> <a
-							onclick="return confirm('»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?)"
-							href="./deleteAction.jsp?evaluationID=">»èÁ¦</a>
-					</div>
+		<div class="card-header bg-light">
+			<div class="row">
+				<div class="col-8 text-left">ì»´í“¨í„°í†µì‹ &nbsp;<small>ê°•ì†”</small></div>
+				<div class="col-4 text-right">
+					ì¢…í•©<span style="color: red;">A</span>
 				</div>
 			</div>
 		</div>
+		<div class="card-body">
+			<h5 class="card-title">
+				ì •ë§ ì¢‹ì€ ê°•ì˜ì—ìš”.&nbsp;<small>(2017ë…„ ê°€ì„í•™ê¸°)</small>
+			</h5>
+			<p class="card-text">ê°•ì˜ê°€ ë„ˆë¬´ ì‰¬ì›Œì„œ ë°°ìš´ê²Œ ì—†ìŠµë‹ˆë‹¤.</p>
+			<div class="row">
+				<div class="col-9 text-left">
+					ì¢…í•©<span style=color:red;">A</span>
+					ì„±ì <span style=color:red;">B</span>
+					ê°•ì˜ë ¥<span style=color:red;">C</span>
+					<span style="color:green;">(ì¶”ì²œ:15)</span>
+				</div>
+				<div class="col-3 text-right">
+					<a onclick="return confirm('ì¶”ì²œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?)" href="./likeAction.jsp?evaluationID=">ì¶”ì²œ</a>
+					<a onclick="return confirm('ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?)" href="./deleteAction.jsp?evaluationID=">ì‚­ì œ</a>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div class="card bg-light mt-3">
+		<div class="card-header bg-light">
+			<div class="row">
+				<div class="col-8 text-left">ìžë°”&nbsp;<small>ì´í™ì„</small></div>
+				<div class="col-4 text-right">
+					ì¢…í•©<span style="color: red;">A</span>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<h5 class="card-title">
+				ì •ë§ ì¢‹ì€ ê°•ì˜ì—ìš”.&nbsp;<small>(2017ë…„ ê°€ì„í•™ê¸°)</small>
+			</h5>
+			<p class="card-text">ê°•ì˜ê°€ ë„ˆë¬´ ì‰¬ì›Œì„œ ë°°ìš´ê²Œ ì—†ìŠµë‹ˆë‹¤.</p>
+			<div class="row">
+				<div class="col-9 text-left">
+					ì¢…í•©<span style=color:red;">A</span>
+					ì„±ì <span style=color:red;">B</span>
+					ê°•ì˜ë ¥<span style=color:red;">C</span>
+					<span style="color:green;">(ì¶”ì²œ:15)</span>
+				</div>
+				<div class="col-3 text-right">
+					<a onclick="return confirm('ì¶”ì²œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?)" href="./likeAction.jsp?evaluationID=">ì¶”ì²œ</a>
+					<a onclick="return confirm('ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?)" href="./deleteAction.jsp?evaluationID=">ì‚­ì œ</a>
+				</div>
+			</div>
+		</div>
+	</div>
 	</section>
 
-	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
-		aria-labelledby="modal" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modal">Æò°¡µî·Ï</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="./evaluationRegisterAction.jsp" method="post">
-						<div class="form-row">
-							<div class="form-group col-sm-6">
-								<label>°­ÀÇ¸í</label> <input type="text" name="lectureName"
-									class="form-control" maxlength="20">
-							</div>
-							<div class="form-group col-sm-6">
-								<label>±³¼ö¸í</label> <input type="text" name="profesosrName"
-									class="form-control" maxlength="20">
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-group col-sm-4">
-								<label>¼ö°­¿¬µµ</label> <select name="lectureYear"
-									class="form-control">
-									<option value="2014">2014</option>
-									<option value="2015">2015</option>
-									<option value="2016">2016</option>
-									<option value="2017">2017</option>
-									<option value="2018" selected>2018</option>
-									<option value="2019">2019</option>
-									<option value="2020">2020</option>
-									<option value="2021">2021</option>
-								</select>
-							</div>
-							<div class="form-group col-sm-4">
-								<label>¼ö°­ÇÐ±â</label> <select name="semesterDivide"
-									class="form-control">
-									<option value="1ÇÐ±â" selected>1ÇÐ±â</option>
-									<option value="¿©¸§ÇÐ±â" selected>¿©¸§ÇÐ±â</option>
-									<option value="2ÇÐ±â" selected>2ÇÐ±â</option>
-									<option value="°Ü¿ïÇÐ±â" selected>°Ü¿ïÇÐ±â</option>
-								</select>
-							</div>
-							<div class="form-group col-sm-4">
-								<label>°­ÀÇ±¸ºÐ</label> <select name="lectureDivide"
-									class="form-control">
-									<option value="Àü°ø" selected>1Àü°ø</option>
-									<option value="±³¾ç" selected>±³¾ç</option>
-									<option value="±âÅ¸" selected>±âÅ¸</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label>Á¦¸ñ</label> <input type="text" name="evalutationTitle"
-								class="form-control" maxlength="30">
-						</div>
-						<div class="form-group">
-							<label>³»¿ë</label>
-							<textarea name="evaluationContent" class="form-control"
-								maxlength="2048" style="height: 180px;">
-							</textarea>
-						</div>
-						<div class="form-row">
-							<div class="form-group col-sm-4">
-								<label>Á¾ÇÕ</label> <select name="totalScore" class="form-control">
-									<option value="A+" selected>A+</option>
-									<option value="A">A</option>
-									<option value="B+">B+</option>
-									<option value="B">B</option>
-									<option value="C+">C+</option>
-									<option value="C">C</option>
-									<option value="D+">D+</option>
-								</select>
-							</div>
-							<div class="form-group col-sm-4">
-								<label>¼ºÀû</label> <select name="creditScore"
-									class="form-control">
-									<option value="A+" selected>A+</option>
-									<option value="A">A</option>
-									<option value="B+">B+</option>
-									<option value="B">B</option>
-									<option value="C+">C+</option>
-									<option value="C">C</option>
-									<option value="D+">D+</option>
-								</select>
-							</div>
-							<div class="form-group col-sm-4">
-								<label>°­ÀÇ·Â</label> <select name="lectureScore"
-									class="form-control">
-									<option value="A+" selected>A+</option>
-									<option value="A">A</option>
-									<option value="B+">B+</option>
-									<option value="B">B</option>
-									<option value="C+">C+</option>
-									<option value="C">C</option>
-									<option value="D+">D+</option>
-								</select>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Ãë¼Ò</button>
-							<button type="submit" class="btn btn-primary">µî·ÏÇÏ±â</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="reportModal" tabindex="-1" role="dialog"
-		aria-labelledby="modal" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modal">½Å°í</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="./reportAction.jsp" method="post">
-						<div class="form-group">
-							<label>Á¦¸ñ</label> <input type="text" name="reportTitle"
-								class="form-control" maxlength="30">
-						</div>
-						<div class="form-group">
-							<label>³»¿ë</label>
-							<textarea name="reportContent" class="form-control"
-								maxlength="2048" style="height: 180px;">
-							</textarea>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Ãë¼Ò</button>
-							<button type="submit" class="btn btn-danger">½Å°íÇÏ±â</button>
-						</div>
-					</form>
-				</div>
 
-			</div>
-		</div>
-	</div>
-	<!-- Footer -->
-	<footer class="py-5 bg-uos">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; 2019 by
-				KLlCK</p>
-		</div>
-		<!-- /.container -->
-	</footer>
-	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Footer -->
+  <footer class="py-5 bg-uos">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; 2019 by KLlCK</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

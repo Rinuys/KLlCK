@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -9,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Modern Business - Start Bootstrap Template</title>
+<title>KLlCK</title>
 
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -47,41 +48,57 @@
 </head>
 
 <body>
+<!-- 로그인 유무 확인 -->
+<%
+	request.setCharacterEncoding("UTF-8");
+	String userID = null;
+	if(session.getAttribute("userID") != null){
+		userID = (String) session.getAttribute("userID");
+	}
+	if(userID == null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인을 해주세요.');");
+		script.println("location.href='login.jsp';");
+		script.println("</script>");
+		script.close();
+		return;
+	}
+%>
 
-	<!-- Navigation -->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
-		<div class="container">
-			<a class="navbar-brand logo" href="index.jsp">KLlCK</a>
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link"
-						href="class-evaluate.jsp">강의평</a></li>
-					<li class="nav-item"><a class="nav-link" href="reports.jsp">족보
-							/ 레포트</a></li>
-					<li class="nav-item"><a class="nav-link" href="board.jsp">게시판</a>
-					</li>
-					<li class="nav-item dropdown active"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							MY Page </a>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="my-status.jsp">내 정보</a> <a
-								class="dropdown-item" href="status-modify.jsp">내 정보 변경</a> <a
-								class="dropdown-item" href="subscribe.jsp">구독 내역</a>
-						</div></li>
-				</ul>
-			</div>
+<!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
+    <div class="container">
+      <a class="navbar-brand logo" href="index.jsp">KLlCK</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="class-evaluate.jsp">강의평</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reports.jsp">족보 / 레포트</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="board.jsp">게시판</a>
+          </li>
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						MY Page </a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+						<a class="dropdown-item" href="my-status.jsp">내 정보</a> 
+						<a class="dropdown-item" href="status-modify.jsp">내 정보 변경</a> 
+						<a class="dropdown-item" href="subscribe.jsp">구독 내역</a>
+						<a class="dropdown-item" href="userLogoutAction.jsp">로그아웃</a>
+				</div>
+			</li>
+			</ul>
 		</div>
-	</nav>
-
+    </div>
+  </nav>
 	<!-- Page Content -->
 	<div class="container">
 
@@ -118,7 +135,7 @@
 					<div class="my-status-content">강솔</div>
 				</div>
 				<div class="my-status-list">
-					<div class="my-status-title">학과</div>
+					<div class="my-status-title mr-3">학과</div>
 					<div class="my-status-content">영어영문학과</div>
 				</div>
 				<div class="my-status-list">

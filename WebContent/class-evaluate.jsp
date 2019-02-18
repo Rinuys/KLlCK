@@ -1,62 +1,83 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
 
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-<title>Modern Business - Start Bootstrap Template</title>
+  <title>KLlCK</title>
 
-<!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="css/modern-business.css" rel="stylesheet">
-<link href="css/custom.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/modern-business.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
 </head>
 <body>
+<!-- 로그인 유무 확인 -->
+<%
+	request.setCharacterEncoding("UTF-8");
+	String userID = null;
+	if(session.getAttribute("userID") != null){
+		userID = (String) session.getAttribute("userID");
+	}
+%>
 
-	<!-- Navigation -->
-
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
-		<div class="container">
-			<a class="navbar-brand logo" href="index.jsp">KLlCK</a>
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link"
-						href="class-evaluate.jsp">강의평</a></li>
-					<li class="nav-item"><a class="nav-link" href="reports.jsp">족보
-							/ 레포트</a></li>
-					<li class="nav-item"><a class="nav-link" href="board.jsp">게시판</a>
-					</li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							MY Page </a>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="my-status.jsp">내 정보</a> <a
-								class="dropdown-item" href="status-modify.jsp">내 정보 변경</a> <a
-								class="dropdown-item" href="subscribe.jsp">구독 내역</a>
-						</div></li>
-				</ul>
-			</div>
+<!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
+    <div class="container">
+      <a class="navbar-brand logo" href="index.jsp">KLlCK</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="class-evaluate.jsp">강의평</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reports.jsp">족보 / 레포트</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="board.jsp">게시판</a>
+          </li>
+          <%
+          	if(userID == null){
+          		
+          %>
+          <li class="nav-item">
+            <a class="nav-link" href="login.jsp">로그인</a>
+          </li>
+          <li class="nav-item">
+          	<a class="nav-link" href="sign-up.jsp">회원가입</a>
+          </li>
+          <%
+          	}else{
+          %>
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						MY Page </a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+						<a class="dropdown-item" href="my-status.jsp">내 정보</a> 
+						<a class="dropdown-item" href="status-modify.jsp">내 정보 변경</a> 
+						<a class="dropdown-item" href="subscribe.jsp">구독 내역</a>
+						<a class="dropdown-item" href="userLogoutAction.jsp">로그아웃</a>
+				</div>
+			</li>
+			<%
+          	}
+			%>
+			</ul>
 		</div>
-	</nav>
-
-	<!-- Page Content -->
+    </div>
+  </nav>
+ 	<!-- Page Content -->
 	<br>
 	<br>
 

@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Modern Business - Start Bootstrap Template</title>
+<title>KLlCK</title>
 
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 
 .bg-image {
 	background-image:
-		url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
+		url('./img/TOMAK.png');
 	background-size: cover;
 	background-position: center;
 }
@@ -131,41 +131,41 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-md-9 col-lg-8 mx-auto">
-								<h3 class="login-heading mb-4">Welcome back!</h3>
-								<form>
+								<h3 class="login-heading mb-2">로그인</h3>
+								<form method="post" action="./userLoginAction.jsp">
 									<div class="form-label-group">
-										<input type="email" id="inputEmail" class="form-control"
-											placeholder="Email address" required autofocus> <label
-											for="inputEmail">Email address</label>
+										<label class="ml-3 mb-1">ID</label>
+										<br>
+										<input type="text" name="userID" id="userID" class="form-control" placeholder="ID" required autofocus> 
 									</div>
 
 									<div class="form-label-group">
-										<input type="password" id="inputPassword" class="form-control"
-											placeholder="Password" required> <label
-											for="inputPassword">Password</label>
+										<label class="ml-3 mb-1">Password</label>
+										<br>
+										<input type="password" name="userPassword" id="userPassword" class="form-control" placeholder="Password" required> 
 									</div>
-
+									<!-- 구현하면 추가 
 									<div class="custom-control custom-checkbox mb-3">
 										<input type="checkbox" class="custom-control-input"
 											id="customCheck1"> <label
 											class="custom-control-label" for="customCheck1">Remember
 											password</label>
 									</div>
+									-->
 									<button
 										class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
-										type="submit">Sign in</button>
+										type="submit">로그인</button>
 									<div>
 										<a class="small" href="find-password.jsp">Forgot password?</a>
 									</div>
 									<a class="small" href="sign-up.jsp">아이디가 없으신가요?</a>
-							</div>
 							</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	<!-- Bootstrap core JavaScript -->
 	<script src="vendor/jquery/jquery.min.js"></script>
