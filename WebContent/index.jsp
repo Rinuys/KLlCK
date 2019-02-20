@@ -1,3 +1,4 @@
+<%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -25,7 +26,9 @@
 		userID = (String) session.getAttribute("userID");
 	}
 %>
-
+<%
+	BoardDAO checkBoardDAO = new BoardDAO();
+%>
 <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
     <div class="container">
@@ -33,6 +36,9 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <%if(userID != null){ %>
+      <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>님 안녕하세요!</label>
+      <%} %>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -100,18 +106,6 @@
   </header>
 <body>
 	<section class="container">
-		<form method="get" action="./index.jsp" class="form-inline mt-3">
-			<select name="lectureDivide" class="form-control mx-1 mt-2">
-				<option value="전체">전체</option>
-				<option value="전공">전공</option>
-				<option value="교양">교양</option>
-				<option value="기타">기타</option>
-			</select>
-			<input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요">
-			<button type="submit" class="btn btn-primary mx-1 mt-2">검색</button>
-			<a class="btn btn-primary mx-1 mt-2" data-toggle="modal" href="#registerModal">등록하기</a>
-			<a class="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#reportModal">신고</a>
-		</form>
 	<div class="card bg-light mt-3">
 		<div class="card-header bg-light">
 			<div class="row">

@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 공지사항 글코드 : "NOTICE" 자유게시판 글코드 : "FREE" 강의평게시판 글코드 : "EVALUATE" 레포트/족보게시판 글코드 : "REPORT" -->
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -62,7 +63,7 @@ p {
 <%
 	request.setCharacterEncoding("UTF-8");
 	String userID = null;
-	String searchType = "최신순";
+	String searchType = "devideTime";
 	String search = "";
 	int pageNumber = 0;
 	String boardType = "FREE";
@@ -70,14 +71,14 @@ p {
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	if(session.getAttribute("search") != null){
-		search = (String) session.getAttribute("search");
+	if(request.getParameter("search") != null){
+		search = (String) request.getParameter("search");
 	}
-	if(session.getAttribute("searchType") != null){
-		searchType = (String) session.getAttribute("searchType");
+	if(request.getParameter("searchType") != null){
+		searchType = (String) request.getParameter("searchType");
 	}
-	if(session.getAttribute("boardType") != null){
-		boardType = (String) session.getAttribute("boardType");
+	if(request.getParameter("boardType") != null){
+		boardType = (String) request.getParameter("boardType");
 	}
 	if(request.getParameter("pageNumber") != null){
 		try{
@@ -86,13 +87,11 @@ p {
 			System.out.println("검색페이지오류");
 		}
 	}
-	System.out.println(userID);
-	System.out.println(search);
-	System.out.println(searchType);
-	System.out.println(boardType);
-	System.out.println(pageNumber);
 %>
 
+<%
+	BoardDAO checkBoardDAO = new BoardDAO();
+%>
 <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
     <div class="container">
@@ -100,6 +99,9 @@ p {
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <%if(userID != null){ %>
+      <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>님 안녕하세요!</label>
+      <%} %>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -142,7 +144,7 @@ p {
 		</div>
     </div>
   </nav>
-
+  
   <!-- Page Content -->
   <div class="container">
     <br><br><br>
@@ -150,24 +152,42 @@ p {
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
         <a href="./board.jsp">공지사항</a>
+        <!-- 공지사항 글쓰기 모달 -->
+		<% 
+			if(userID != null){
+				if(userID.equals("admin")){
+			%>
+		<a class="btn btn-info mb-1" data-toggle="modal" href="#noticeRegisterModal">공지사항글쓰기</a>
+		<br>
+		<%
+		}
+			}
+		%>
       </li>
+
     </ol>
 
-    <!-- Intro Content -->
+    <!-- 공지사항 글배열 -->
+    <%
+	ArrayList<BoardDTO> noticeBoardList = new ArrayList<BoardDTO>();
+	noticeBoardList = new BoardDAO().getNoticeList("NOTICE", 0);
+	if(noticeBoardList != null){
+		for(int i = 0; i < noticeBoardList.size(); i++){
+			if(i == 3)break;
+			BoardDTO noticeBoard = noticeBoardList.get(i);
+    %>
     <div class="row">
       <div class="notice">
-        <h2>공지사항1</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed voluptate nihil eum consectetur similique? Consectetur, quod, incidunt, harum nisi dolores delectus reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat.</p>
+        <h2><%=noticeBoard.getBoardTitle() %></h2>
+        <p><%=noticeBoard.getBoardContent() %></p>
         <hr>
       </div>
     </div>
-    <div class="row">
-        <div class="notice">
-          <h2>공지사항2</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed voluptate nihil eum consectetur similique? Consectetur, quod, incidunt, harum nisi dolores delectus reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat.</p>
-          <hr>
-        </div>
-      </div>
+	<%
+			}
+	}
+	%>
+
     <!-- /.row -->
 
     <!-- Team Members -->
@@ -177,9 +197,12 @@ p {
         </li>
       </ol>
 	<form method="get" action="./board.jsp" class="form-inline mt-3 mb-2">
-				<select name="Divide" class="form-control ml-2">
-					<option value="devideTime"  selected>최신순</option>
-					<option value="devideLike" <% if(searchType.equals("추천순")) out.println("selected"); %>>추천순</option>
+				<select name="searchType" class="form-control ml-2">
+				<%
+					System.out.println(searchType);
+				%>
+					<option value="devideTime" <% if(searchType.equals("devideTime")) out.println("selected"); %>>최신순</option>
+					<option value="devideLike" <% if(searchType.equals("devideLike")) out.println("selected"); %>>추천순</option>
 				</select>
 				<input type="text" name="search" class="form-control " placeholder="내용을 입력하세요.">
 				<button type="submit" class="btn btn-primary mt-3 mb-3">검색</button>
@@ -196,7 +219,7 @@ p {
 		<%
 			ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
 			boardList = new BoardDAO().getList(searchType, search, boardType, pageNumber);
-			if(boardList != null)
+			if(boardList != null){
 				for(int i = 0; i < boardList.size(); i++){
 					if(i == 6)break;
 					BoardDTO board = boardList.get(i);
@@ -207,15 +230,15 @@ p {
     <%
 	}
     %>
+    <%
+	BoardDAO boardDAO = new BoardDAO();
+	%>
       <div class="col-lg-4 mb-4">
         <div class="card h-100 text-center">
-	<%
-		BoardDAO boardDAO = new BoardDAO();
-	%>
           <div class="card-body">
             <div class="card-body-top">
                 <img class="card-profile" src="http://artzone.indiecolaj.com/images/24/dp.jpg" alt="">
-                <div class="card-writer"><%=boardDAO.getUserNick(board.getBoardUserID())%></div>
+                <div class="card-writer"><%=boardDAO.getUserNick(board.getUserID())%></div>
             </div>
             <div class="card-body-top">
                 <div class="card-writer"><%=board.getBoardTitle() %></div>
@@ -242,7 +265,7 @@ p {
 		<%
 			}else{
 		%>
-		<a class="page-link" href="./board.jsp?searchType=<%= URLEncoder.encode(searchType, "UTF-8") %>&search<%= URLEncoder.encode(search, "UTF-8")%>&boardType<%=URLEncoder.encode(boardType, "UTF-8") %>&pageNumber=<%= pageNumber - 1 %>">이전</a>
+		<a class="page-link" href="./board.jsp?searchType=<%= URLEncoder.encode(searchType, "UTF-8") %>&search=<%= URLEncoder.encode(search, "UTF-8")%>&boardType=<%=URLEncoder.encode(boardType, "UTF-8") %>&pageNumber=<%= pageNumber - 1 %>">이전</a>
 		<%
 			}
 		%>
@@ -255,21 +278,17 @@ p {
 		<%
 			}else{
 		%>
-		<a class="page-link" href="./board.jsp?searchType=<%= URLEncoder.encode(searchType, "UTF-8") %>&search<%= URLEncoder.encode(search, "UTF-8")%>&boardType<%=URLEncoder.encode(boardType, "UTF-8") %>&pageNumber=<%= pageNumber + 1 %>">다음</a>
+		<a class="page-link" href="./board.jsp?searchType=<%= URLEncoder.encode(searchType, "UTF-8") %>&search=<%= URLEncoder.encode(search, "UTF-8")%>&boardType=<%=URLEncoder.encode(boardType, "UTF-8") %>&pageNumber=<%= pageNumber + 1 %>">다음</a>
 		<%
+			}
 			}
 		%>
 		</li>
 	</ul>
-
-
-
-
-
-
-
-
 	</body>
+	
+	
+	<!-- 자유게시판 글쓰기 모달 -->
 		<div class="modal fade" id="freeRegisterModal" tabindex="-1" role="dialog" area-labelledby="modal" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -285,17 +304,51 @@ p {
 						<!-- freeBoardResgisterAction.jsp로 넘겨줄form태그 -->
 						<form action="./freeBoardRegisterAction.jsp" method="post">
 							<div class="form-row">
-								<div class="form-group col-sm-10 ml-3">
+								<div class="form-group col-sm-10 ml-3  mr-3">
 									<label>제목</label>
 									<input type="text" name="boardTitle" class="form-control" maxlength="20" placeholder="글제목">
 								</div>
-								<div class="form-group col-sm-10 ml-3">
+								<div class="form-group col-sm-10 ml-3  mr-3">
 									<label>글내용</label>
 									<textarea name="boardContent" class="form-control" style="height:300px" maxlength="2048" placeholder="글내용"></textarea>
 								</div>
-								<div class="form-group col-sm-10 ml-3">
+								<div class="form-group col-sm-10 ml-3  mr-3">
 									<label>해시태그(검색을 빠르게 해줍니다.)</label>
 									<textarea name="HashTag" class="form-control" style="height:40px" maxlength="2048" placeholder="#팝니다.#삽니다.#궁금해요.#필요해요."></textarea>
+								</div>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-primary ml-1">등록하기</button>
+									<button type="button" class="btn btn-secondary ml-1" data-dismiss="modal">닫기</button>						
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 공지사항 글쓰기 모달 -->
+		<div class="modal fade" id="noticeRegisterModal" tabindex="-1" role="dialog" area-labelledby="modal" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+				<!-- 모달헤더 -->
+					<div class="modal-header">
+						<h5 class="modal-title" id="modal">공지사항 글쓰기</h5>
+						<button type="button" class="close" data-dismiss="modal" area-label="Close">
+							<span area-hidden="true">&times;</span>
+						</button>	
+					</div>
+				<!-- 모달 바디 -->
+					<div class="modal-body">
+						<!-- freeBoardResgisterAction.jsp로 넘겨줄form태그 -->
+						<form action="./noticeBoardRegisterAction.jsp" method="post">
+							<div class="form-row">
+								<div class="form-group col-sm-10 ml-3 mr-3">
+									<label>제목</label>
+									<input type="text" name="boardTitle" class="form-control" maxlength="20" style="width:100%" placeholder="글제목">
+								</div>
+								<div class="form-group col-sm-10 ml-3  mr-3">
+									<label>글내용</label>
+									<textarea name="boardContent" class="form-control" style="height:300px;width:100%" maxlength="2048" placeholder="글내용"></textarea>
 								</div>
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary ml-1">등록하기</button>

@@ -1,3 +1,4 @@
+
 <%@page import="board.BoardDTO"%>
 <%@page import="board.BoardDAO"%>
 <%@page import="java.io.PrintWriter"%>
@@ -23,20 +24,20 @@
 <%
 	//로그인 유무확인
 	String userID = null;
-	if(session.getAttribute("userID") != null){
+	if(session.getAttribute("userID") != "admin"){
 		userID = (String) session.getAttribute("userID");
 	}
 	if(userID == null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('로그인을 해주세요.');");
-		script.println("location.href='login.jsp';");
+		script.println("alert('관리자만 사용가능합니다.');");
+		script.println("location.href='index.jsp';");
 		script.println("</script>");
 		script.close();
 		return;
 	}
 	request.setCharacterEncoding("UTF-8");
-	String boardType = "FREE";
+	String boardType = "NOTICE";
 	String boardTitle = null;
 	String boardContent = null;
 	String boardIP = null;
@@ -61,11 +62,11 @@
 	}else{
 		BoardDAO boardDAO = new BoardDAO();
 		boardIP = getClientIP(request);
-		int result = boardDAO.write(new BoardDTO(0, "FREE", boardTitle, boardContent, null, boardIP, null, userID));
+		int result = boardDAO.write(new BoardDTO(0, "NOTICE", boardTitle, boardContent, null, boardIP, null, userID));
 		if(result == -1){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('자유게시판 글쓰기에 실패했습니다.');");
+			script.println("alert('공지사항 쓰기에 실패했습니다.');");
 			script.println("location.href='board.jsp';");
 			script.println("</script>");
 			script.close();
@@ -73,7 +74,7 @@
 		}else{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('글쓰기에 성공했습니다.');");
+			script.println("alert('공지사항 쓰기에 성공했습니다.');");
 			script.println("location.href='board.jsp';");
 			script.println("</script>");
 			script.close();
