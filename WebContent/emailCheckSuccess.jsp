@@ -92,61 +92,14 @@
 		</div>
     </div>
   </nav>
-
   <header>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner" role="listbox">
-        
-        <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="main-background" style="background-image: url('http://rgb.45soft.com/image/1920x1080/ffffff.jpg')">
-          <div class="search">
-            <p class="logo-main">KLlCK</p>
-            <form action="">
-                <input class="search-form" type="text" placeholder="Search.....">
-                <input class="search-btn" type="submit" value="">
-            </form>
-          </div>  
-        </div>
-      </div>
-    </div>
-  </header>
-<body>
-	<section class="container mb-3">
-		<div class="card bg-light mt-3">
-		<div class="card-header bg-light">
-			<div class="row">
-				<div class="col-8 text-left">자바&nbsp;<small>이홍석</small></div>
-				<div class="col-4 text-right">
-					종합<span style="color: red;">A</span>
-				</div>
-			</div>
+	<section class="container mt-10" style="max-width:560px; margin-top: 150px;">
+		<div class="alert alert-success mt-3" role="alert">
+			이메일 인증이 완료되었습니다. 다음 링크로 이동해주세요
 		</div>
-		<div class="card-body">
-			<h5 class="card-title">
-				정말 좋은 강의에요.&nbsp;<small>(2017년 가을학기)</small>
-			</h5>
-			<p class="card-text">강의가 너무 쉬워서 배운게 없습니다.</p>
-			<div class="row">
-				<div class="col-9 text-left">
-					종합<span style=color:red;">A</span>
-					성적<span style=color:red;">B</span>
-					강의력<span style=color:red;">C</span>
-					<span style="color:green;">(추천:15)</span>
-				</div>
-				<div class="col-3 text-right">
-					<a onclick="return confirm('추천하시겠습니까?)" href="./likeAction.jsp?evaluationID=">추천</a>
-					<a onclick="return confirm('삭제하시겠습니까?)" href="./deleteAction.jsp?evaluationID=">삭제</a>
-				</div>
-			</div>
-		</div>
-	</div>
+		<a style=""class="btn btn btn-outline-secondary" href="http://kllck.ml/">KLlCK</a>
 	</section>
-
+	</header>
 
   <!-- Footer -->
   <footer class="py-5 bg-uos">

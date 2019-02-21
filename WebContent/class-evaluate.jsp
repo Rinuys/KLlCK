@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page import="board.BoardDAO"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
   <link href="css/custom.css" rel="stylesheet">
 </head>
 <body>
-<!-- ·Î±×ÀÎ À¯¹« È®ÀÎ -->
+<!-- ë¡œê·¸ì¸ ìœ ë¬´ í™•ì¸ -->
 <%
 	request.setCharacterEncoding("UTF-8");
 	String userID = null;
@@ -27,7 +28,9 @@
 		userID = (String) session.getAttribute("userID");
 	}
 %>
-
+<%
+	BoardDAO checkBoardDAO = new BoardDAO();
+%>
 <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
     <div class="container">
@@ -35,39 +38,40 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <%if(userID != null){ %>
+      <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>ë‹˜ ì•ˆë…•í•˜ì„¸ìš”!</label>
+      <%} %>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="class-evaluate.jsp">°­ÀÇÆò</a>
+            <a class="nav-link" href="class-evaluate.jsp">ê°•ì˜í‰</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="reports.jsp">Á·º¸ / ·¹Æ÷Æ®</a>
+            <a class="nav-link" href="reports.jsp">ì¡±ë³´ / ë ˆí¬íŠ¸</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="board.jsp">°Ô½ÃÆÇ</a>
+            <a class="nav-link" href="board.jsp">ê²Œì‹œíŒ</a>
           </li>
           <%
           	if(userID == null){
           		
           %>
           <li class="nav-item">
-            <a class="nav-link" href="login.jsp">·Î±×ÀÎ</a>
+            <a class="nav-link" href="login.jsp">ë¡œê·¸ì¸</a>
           </li>
           <li class="nav-item">
-          	<a class="nav-link" href="sign-up.jsp">È¸¿ø°¡ÀÔ</a>
+          	<a class="nav-link" href="sign-up.jsp">íšŒì›ê°€ìž…</a>
           </li>
           <%
           	}else{
           %>
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						MY Page </a>
-					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-						<a class="dropdown-item" href="my-status.jsp">³» Á¤º¸</a> 
-						<a class="dropdown-item" href="status-modify.jsp">³» Á¤º¸ º¯°æ</a> 
-						<a class="dropdown-item" href="subscribe.jsp">±¸µ¶ ³»¿ª</a>
-						<a class="dropdown-item" href="userLogoutAction.jsp">·Î±×¾Æ¿ô</a>
+			<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MY Page </a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+						<a class="dropdown-item" href="my-status.jsp">ë‚´ ì •ë³´</a> 
+						<a class="dropdown-item" href="status-modify.jsp">ë‚´ ì •ë³´ ë³€ê²½</a> 
+						<a class="dropdown-item" href="subscribe.jsp">êµ¬ë… ë‚´ì—­</a>
+						<a class="dropdown-item" href="userLogoutAction.jsp">ë¡œê·¸ì•„ì›ƒ</a>
 				</div>
 			</li>
 			<%
@@ -84,9 +88,9 @@
 	<div style='display: inline; float: left; width: 200px; margin: 10px;'>
 		<div class="col- mb-4">
 			<div class="list-group">
-				<a href="my-status.jsp" class="list-group-item">³» Á¤º¸</a> <a
-					href="status-modify.jsp" class="list-group-item">³» Á¤º¸ º¯°æ</a> <a
-					href="subscribe.jsp" class="list-group-item">±¸µ¶ ³»¿ª</a>
+				<a href="my-status.jsp" class="list-group-item">ë‚´ ì •ë³´</a> <a
+					href="status-modify.jsp" class="list-group-item">ë‚´ ì •ë³´ ë³€ê²½</a> <a
+					href="subscribe.jsp" class="list-group-item">êµ¬ë… ë‚´ì—­</a>
 			</div>
 		</div>
 	</div>
@@ -94,7 +98,7 @@
 
 	<div style='display: inline; float: left; width: 70%; margin: 10px;'>
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item active">°­ÀÇÆò</li>
+			<li class="breadcrumb-item active">ê°•ì˜í‰</li>
 		</ol>
 
 		<div class="mb-4" id="accordion" role="tablist"
@@ -104,7 +108,7 @@
 					<h5 class="mb-0">
 						<a data-toggle="collapse" data-parent="#accordion"
 							href="#collapseOne" aria-expanded="true"
-							aria-controls="collapseOne">°­ÁÂ¸í1</a>
+							aria-controls="collapseOne">ê°•ì¢Œëª…1</a>
 					</h5>
 				</div>
 				<div id="collapseOne" class="collapse show" role="tabpanel"
@@ -127,7 +131,7 @@
 					<h5 class="mb-0">
 						<a class="collapsed" data-toggle="collapse"
 							data-parent="#accordion" href="#collapseTwo"
-							aria-expanded="false" aria-controls="collapseTwo">°­ÁÂ¸í2</a>
+							aria-expanded="false" aria-controls="collapseTwo">ê°•ì¢Œëª…2</a>
 					</h5>
 				</div>
 				<div id="collapseTwo" class="collapse" role="tabpanel"
@@ -150,7 +154,7 @@
 					<h5 class="mb-0">
 						<a class="collapsed" data-toggle="collapse"
 							data-parent="#accordion" href="#collapseThree"
-							aria-expanded="false" aria-controls="collapseThree">°­ÁÂ¸í3</a>
+							aria-expanded="false" aria-controls="collapseThree">ê°•ì¢Œëª…3</a>
 					</h5>
 				</div>
 				<div id="collapseThree" class="collapse" role="tabpanel"
@@ -178,11 +182,9 @@
 				KLlCK</p>
 		</footer>
 	</div>
-	<!-- Á¦ÀÌÄõ¸® ÀÚ¹Ù½ºÅ©¸³Æ® -->
+	<!-- ì œì´ì¿¼ë¦¬ ìžë°”ìŠ¤í¬ë¦½íŠ¸ -->
 	<script src="./js/jquery.min.js"></script>
-	<!-- ÆÄÆÛ ÀÚ¹Ù½ºÅ©¸³Æ® -->
-	<script src="./js/pooper.min.js"></script>
-	<!-- ºÎÆ®½ºÆ®·¦ ÀÚ¹Ù½ºÅ©¸³Æ® -->
+	<!-- ë¶€íŠ¸ìŠ¤íŠ¸ëž© ìžë°”ìŠ¤í¬ë¦½íŠ¸ -->
 	<script src="./js/bootstrap.min.js"></script>
 </body>
 </html>

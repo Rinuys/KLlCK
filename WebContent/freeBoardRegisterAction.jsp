@@ -61,7 +61,7 @@
 	}else{
 		BoardDAO boardDAO = new BoardDAO();
 		boardIP = getClientIP(request);
-		int result = boardDAO.write(new BoardDTO(0, "FREE", boardTitle, boardContent, null, boardIP, null, userID));
+		int result = boardDAO.write(new BoardDTO(0, "FREE", boardTitle, boardContent, null, boardIP, null, userID, 0));
 		if(result == -1){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");

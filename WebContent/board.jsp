@@ -1,3 +1,6 @@
+<%@page import="user.UserDAO"%>
+<%@page import="user.UserDTO"%>
+<%@page import="likey.LikeDAO"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="board.BoardDAO"%>
@@ -15,13 +18,11 @@
   <meta name="author" content="">
 
   <title>KLlCK</title>
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom styles for this template -->
+    <!-- 부트스트랩 css추가 -->
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+  <!-- 커스텀CSS -->
   <link href="css/modern-business.css" rel="stylesheet">
   <link href="css/custom.css" rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <style>
 p {
 	margin: 20px 0px;
@@ -56,6 +57,11 @@ p {
       width:30px;
       height:30px;
     }
+    .card-footer {
+    padding: unset;
+    background-color: unset;
+    border-top: none; 
+}
   </style>
 </head>
 <body>
@@ -90,60 +96,68 @@ p {
 %>
 
 <%
-	BoardDAO checkBoardDAO = new BoardDAO();
+BoardDAO checkBoardDAO = new BoardDAO();
+UserDAO emailCheckUserDAO = new UserDAO();
 %>
 <!-- Navigation -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
-    <div class="container">
-      <a class="navbar-brand logo" href="index.jsp">KLlCK</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <%if(userID != null){ %>
-      <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>님 안녕하세요!</label>
-      <%} %>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="class-evaluate.jsp">강의평</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="reports.jsp">족보 / 레포트</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="board.jsp">게시판</a>
-          </li>
-          <%
-          	if(userID == null){
-          		
-          %>
-          <li class="nav-item">
-            <a class="nav-link" href="login.jsp">로그인</a>
-          </li>
-          <li class="nav-item">
-          	<a class="nav-link" href="sign-up.jsp">회원가입</a>
-          </li>
-          <%
-          	}else{
-          %>
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						MY Page </a>
-					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-						<a class="dropdown-item" href="my-status.jsp">내 정보</a> 
-						<a class="dropdown-item" href="status-modify.jsp">내 정보 변경</a> 
-						<a class="dropdown-item" href="subscribe.jsp">구독 내역</a>
-						<a class="dropdown-item" href="userLogoutAction.jsp">로그아웃</a>
-				</div>
-			</li>
-			<%
-          	}
-			%>
-			</ul>
-		</div>
-    </div>
-  </nav>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
+<div class="container">
+  <a class="navbar-brand logo" href="index.jsp">KLlCK</a>
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <%if(userID != null){ %>
+  <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>님 안녕하세요!</label>
+  <%} %>
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="class-evaluate.jsp">강의평</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="reports.jsp">족보 / 레포트</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="board.jsp">게시판</a>
+      </li>
+      <%
+      	if(userID == null){
+      		
+      %>
+      <li class="nav-item">
+        <a class="nav-link" href="login.jsp">로그인</a>
+      </li>
+      <li class="nav-item">
+      	<a class="nav-link" href="sign-up.jsp">회원가입</a>
+      </li>
+      <%
+      	}else{
+      %>
+		<li class="nav-item dropdown"><a
+			class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					MY Page </a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+					<a class="dropdown-item" href="my-status.jsp">내 정보</a> 
+					<a class="dropdown-item" href="status-modify.jsp">내 정보 변경</a> 
+					<a class="dropdown-item" href="subscribe.jsp">구독 내역</a>
+					<%
+					if(!emailCheckUserDAO.getUserEmailChecked(userID)){
+					%>
+					<a class="dropdown-item" href="emailSendAction.jsp">이메일 인증하기</a>
+					<%
+					}
+					%>
+					<a class="dropdown-item" href="userLogoutAction.jsp">로그아웃</a>
+			</div>
+		</li>
+		<%
+      	}
+		%>
+		</ul>
+	</div>
+</div>
+</nav>
   
   <!-- Page Content -->
   <div class="container">
@@ -178,7 +192,7 @@ p {
     %>
     <div class="row">
       <div class="notice">
-        <h2><%=noticeBoard.getBoardTitle() %></h2>
+        <h4><%=noticeBoard.getBoardTitle() %></h4>
         <p><%=noticeBoard.getBoardContent() %></p>
         <hr>
       </div>
@@ -221,7 +235,7 @@ p {
 			boardList = new BoardDAO().getList(searchType, search, boardType, pageNumber);
 			if(boardList != null){
 				for(int i = 0; i < boardList.size(); i++){
-					if(i == 6)break;
+					if(i == 9)break;
 					BoardDTO board = boardList.get(i);
 		%>
 	<% if(i == 0){
@@ -232,22 +246,30 @@ p {
     %>
     <%
 	BoardDAO boardDAO = new BoardDAO();
+    LikeDAO likeDAO = new LikeDAO();
+    boardDAO.setBoardLikeCount(userID, Integer.toString(board.getBoardIndex()));
 	%>
       <div class="col-lg-4 mb-4">
-        <div class="card h-100 text-center">
-          <div class="card-body">
-            <div class="card-body-top">
-                <img class="card-profile" src="http://artzone.indiecolaj.com/images/24/dp.jpg" alt="">
+<div class="card">
+  <div class="card-header">
+    <img class="card-profile" src="http://artzone.indiecolaj.com/images/24/dp.jpg" alt="">
                 <div class="card-writer"><%=boardDAO.getUserNick(board.getUserID())%></div>
-            </div>
-            <div class="card-body-top">
-                <div class="card-writer"><%=board.getBoardTitle() %></div>
-            </div>
-            <div class="card-body-main">
-                <p><%= board.getBoardContent() %></p>
-            </div> 
-          </div>          
-        </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%=board.getBoardTitle() %></h5>
+    <p class="card-text"><%= board.getBoardContent() %>.</p>
+     <br>
+     	<div class="card-footer">
+            <%if(userID != null){ %>
+				<a class="btn btn-success" href="./likeAction.jsp?userID=<%=URLEncoder.encode(userID, "UTF-8")%>&boardIndex=<%=board.getBoardIndex()%>">추천수 : <%=likeDAO.likeCount(Integer.toString(board.getBoardIndex())) %></a>
+			<%if(userID.equals(board.getUserID())){ %>
+				<a class="btn btn-danger" onclick="return confirm('삭제하시겠습니까?')" href="./deleteAction.jsp?userID=<%=URLEncoder.encode(userID, "UTF-8")%>&boardIndex=<%=board.getBoardIndex()%>">삭제</a>
+			<%	}
+				}
+			%>
+			</div>
+  </div>
+</div>
       </div>
     <%
     	}
@@ -376,10 +398,5 @@ p {
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>

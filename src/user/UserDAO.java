@@ -62,4 +62,86 @@ public class UserDAO {
 		}
 		return -1; //데이터베이스 삽입오류
 	}
+	//id를 이용해 email인증 여부 확인함수
+	public boolean getUserEmailChecked(String userID) {
+		String SQL = "SELECT userEmailChecked FROM user WHERE userID = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			System.out.println(rs.next());
+			return rs.getBoolean(1);
+		}catch(Exception e) {
+			e.getStackTrace();
+		}finally {
+				try {
+					if(conn != null)
+					conn.close();
+				}catch(Exception e) {}
+				try {
+					if(rs != null) 
+					rs.close();
+				}catch(Exception e) {}
+				try {
+					if(pstmt != null) 
+					pstmt.close();
+				}catch(Exception e) {}
+		}return false;
+	}
+	//id를 이용해 email 확인함수
+	public String getUserEmail(String userID) {
+		String SQL = "SELECT userEmail FROM user WHERE userID = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}return null;
+		}catch(Exception e) {
+			e.getStackTrace();
+		}finally {
+				try {
+					if(conn != null)
+					conn.close();
+				}catch(Exception e) {}
+				try {
+					if(rs != null) 
+					rs.close();
+				}catch(Exception e) {}
+				try {
+					if(pstmt != null) 
+					pstmt.close();
+				}catch(Exception e) {}
+		}return null;
+	}
+	//이메일 인증시 체크함수
+	public boolean setUserEmailChecked(String userID) {
+		String SQL = "UPDATE user SET userEmailChecked = true where userID= ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userID);
+			pstmt.executeUpdate();
+			return true;//성공
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{if(conn != null) conn.close();}catch(Exception e) {}
+			try{if(pstmt != null) pstmt.close();}catch(Exception e) {}
+			try{if(rs!= null) rs.close();}catch(Exception e) {}
+		}
+		return false;
+	}
 }

@@ -1,3 +1,6 @@
+<%@page import="user.UserDAO"%>
+<%@page import="user.UserDTO"%>
+<%@page import="board.BoardDAO"%>
 <%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
@@ -66,6 +69,10 @@
 	}
 %>
 
+<%
+BoardDAO checkBoardDAO = new BoardDAO();
+UserDAO emailCheckUserDAO = new UserDAO();
+%>
 <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
     <div class="container">
@@ -73,6 +80,9 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <%if(userID != null){ %>
+      <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>님 안녕하세요!</label>
+      <%} %>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -84,6 +94,19 @@
           <li class="nav-item">
             <a class="nav-link" href="board.jsp">게시판</a>
           </li>
+          <%
+          	if(userID == null){
+          		
+          %>
+          <li class="nav-item">
+            <a class="nav-link" href="login.jsp">로그인</a>
+          </li>
+          <li class="nav-item">
+          	<a class="nav-link" href="sign-up.jsp">회원가입</a>
+          </li>
+          <%
+          	}else{
+          %>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -92,9 +115,19 @@
 						<a class="dropdown-item" href="my-status.jsp">내 정보</a> 
 						<a class="dropdown-item" href="status-modify.jsp">내 정보 변경</a> 
 						<a class="dropdown-item" href="subscribe.jsp">구독 내역</a>
+						<%
+						if(!emailCheckUserDAO.getUserEmailChecked(userID)){
+						%>
+						<a class="dropdown-item" href="emailSendAction.jsp">이메일 인증하기</a>
+						<%
+						}
+						%>
 						<a class="dropdown-item" href="userLogoutAction.jsp">로그아웃</a>
 				</div>
 			</li>
+			<%
+          	}
+			%>
 			</ul>
 		</div>
     </div>

@@ -1,6 +1,4 @@
-
-<%@page import="board.BoardDTO"%>
-<%@page import="board.BoardDAO"%>
+<%@page import="likey.LikeDAO"%>
 <%@page import="java.io.PrintWriter"%>
 <%@
 	page language="java" contentType="text/html; charset=utf-8"
@@ -27,46 +25,31 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	if(!userID.equals("admin")){
+	if(userID == null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('관리자만 사용가능합니다.');");
+		script.println("alert('로그인해주세요.');");
 		script.println("location.href='index.jsp';");
 		script.println("</script>");
 		script.close();
 		return;
 	}
 	request.setCharacterEncoding("UTF-8");
-	String boardType = "NOTICE";
-	String boardTitle = null;
-	String boardContent = null;
-	String boardIP = null;
-
-	//구현하면 추가
-	//String boardFile = null;
-
-	if(request.getParameter("boardTitle") != null){
-		boardTitle = (String)request.getParameter("boardTitle");
+	String boardIndex = null;
+	String boardIP = getClientIP(request);
+	if(request.getParameter("boardIndex") != null){
+		boardIndex = (String)request.getParameter("boardIndex");
 	}
-	if(request.getParameter("boardContent") != null){
-		boardContent = (String)request.getParameter("boardContent");
-	}
-	if(boardTitle == null || boardContent == null || boardTitle.equals("") || boardContent.equals("")){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('입력이 안 된 사항이 있습니다.');");
-		script.println("history.back();");
-		script.println("</script>");
-		script.close();
-		return;
-	}else{
-		BoardDAO boardDAO = new BoardDAO();
-		boardIP = getClientIP(request);
-		int result = boardDAO.write(new BoardDTO(0, "NOTICE", boardTitle, boardContent, null, boardIP, null, userID, 0));
-		if(result == -1){
+	LikeDAO likeDAO = new LikeDAO();
+	int result = likeDAO.likeExist(userID, boardIndex);
+	System.out.println("result1 : " + result);
+	if (result == 0) {
+		result = likeDAO.like(userID, boardIndex, boardIP);
+		System.out.println("result2 : " + result);
+		if(result == 1){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('공지사항 쓰기에 실패했습니다.');");
+			script.println("alert('추천하시겠습니까?');");
 			script.println("location.href='board.jsp';");
 			script.println("</script>");
 			script.close();
@@ -74,11 +57,20 @@
 		}else{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('공지사항 쓰기에 성공했습니다.');");
+			script.println("alert('데이터베이스 오류.');");
 			script.println("location.href='board.jsp';");
 			script.println("</script>");
 			script.close();
 			return;
 		}
+	} else {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('추천을 취소하시겠습니까?');");
+		script.print("location.href='likeCancelAction.jsp?boardIndex=");
+		script.println(boardIndex + "';");
+		script.println("</script>");
+		script.close();
+		return;
 	}
-	%>
+%>

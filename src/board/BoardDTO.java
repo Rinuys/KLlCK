@@ -1,7 +1,5 @@
 package board;
 
-import util.GetIP;
-
 public class BoardDTO {
 	private int boardIndex;
 	private String userID;
@@ -11,7 +9,16 @@ public class BoardDTO {
 	private String boardIP;
 	private String boardType;
 	private String boardFile;
+	private int likeCount;
 	
+	
+	
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
 	public String getBoardType() {
 		return boardType;
 	}
@@ -61,7 +68,7 @@ public class BoardDTO {
 		this.boardFile = boardFile;
 	}
 	public BoardDTO(int boardIndex, String boardType , String boardTitle,
-			String boardContent,String boardCreateAt,  String boardIP, String boardFile, String userID) {
+			String boardContent,String boardCreateAt,  String boardIP, String boardFile, String userID, int likeCount) {
 		this.boardType = boardType;
 		this.boardIndex = boardIndex;
 		this.userID = userID;
@@ -70,6 +77,7 @@ public class BoardDTO {
 		this.boardCreateAt = boardCreateAt;
 		this.boardIP = boardIP;
 		this.boardFile = boardFile;
+		this.likeCount = likeCount;
 	}
 	public BoardDTO() {
 		

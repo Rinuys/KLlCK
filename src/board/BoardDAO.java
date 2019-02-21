@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import likey.LikeDAO;
 import util.DatabaseUtil;
-import util.GetIP;
 
 public class BoardDAO {
 	public int write(BoardDTO boardDTO) {
@@ -45,7 +45,10 @@ public class BoardDAO {
 		try {
 			if(searchType.equals("devideTime")) {
 				SQL = "SELECT * FROM board WHERE boardType LIKE ? AND CONCAT(userID, boardTitle, boardContent) LIKE ? "
-						+ "ORDER BY boardIndex DESC LIMIT " + pageNumber * 6 + ", " + pageNumber * 6  + 7;
+						+ "ORDER BY boardIndex DESC LIMIT " + pageNumber * 9 + ", " + pageNumber * 9  + 10;
+			}else if(searchType.equals("devideLike")) {
+				SQL = "SELECT * FROM board WHERE boardType LIKE ? AND CONCAT(userID, boardTitle, boardContent) LIKE ? "
+						+ "ORDER BY likeCount DESC LIMIT " + pageNumber * 9 + ", " + pageNumber * 9  + 10;
 			}
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, boardType );
@@ -61,7 +64,8 @@ public class BoardDAO {
 						rs.getString(5),
 						rs.getString(6),
 						rs.getString(7),
-						rs.getString(8)
+						rs.getString(8),
+						rs.getInt(9)
 						);
 				boardList.add(boardDTO);
 			}
@@ -101,7 +105,8 @@ public class BoardDAO {
 						rs.getString(5),
 						rs.getString(6),
 						rs.getString(7),
-						rs.getString(8)
+						rs.getString(8),
+						rs.getInt(9)
 						);
 				boardList.add(boardDTO);
 			}
@@ -164,5 +169,53 @@ public class BoardDAO {
 			try{if(rs!= null) rs.close();}catch(Exception e) {}
 		}
 		return null;//데이터베이스오류
+	}
+	//게시글 삭제 함수
+	public int delete(String userID, String boardIndex) {
+		String SQL = "DELETE FROM board where userID = ? AND boardIndex = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			pstmt.setString(2, boardIndex);
+			return pstmt.executeUpdate();//삭제완료시 1반환
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
+	}
+	//likeCount설정함수
+	public int setBoardLikeCount(String userID, String boardIndex) {
+		String SQL = "UPDATE board set likeCount = ? where boardindex = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		LikeDAO likeDAO = new LikeDAO();
+		int i = likeDAO.likeCount(boardIndex);
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, i);
+			pstmt.setString(2, boardIndex);
+			return pstmt.executeUpdate();//설정완료시 1반환
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
 	}
 }

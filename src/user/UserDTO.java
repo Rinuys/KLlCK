@@ -10,6 +10,8 @@ public class UserDTO {
 	private String userGender;
 	private String userAccount;
 	private String userPK;
+	
+	
 	public String getUserID() {
 		return userID;
 	}
@@ -34,7 +36,7 @@ public class UserDTO {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public boolean isUserEmailChecked() {
+	public boolean getUserEmailChecked() {
 		return userEmailChecked;
 	}
 	public void setUserEmailChecked(boolean userEmailChecked) {

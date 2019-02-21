@@ -78,16 +78,5 @@
 		script.println("location.href='index.jsp';");
 		script.println("</script>");
 		script.close();
-		/*
-		email구현시 활성화예정
-		else{
-			session.setAttribute("userID", userID);
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("location.href = 'emailSendAction.jsp';");
-			script.println("</script>");
-			script.close();
-			}
-		}*/
 		}
 %>

@@ -1,9 +1,10 @@
-package like;
+package likey;
 
 public class LikeDTO {
 	private String userID;
 	private int boardIndex;
 	private String userIP;
+	
 	public String getUserID() {
 		return userID;
 	}
