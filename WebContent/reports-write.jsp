@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String userID = null;
+		
+	if(session.getAttribute("userID") != null){
+		userID = (String) session.getAttribute("userID");
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,26 +25,25 @@
 <!-- Custom styles for this template -->
 <link href="css/modern-business.css" rel="stylesheet">
 <style>
-/* nav-bar */
-.bg-uos {
-	background-color: rgb(10, 77, 155);
-}
-
-.logo {
-	font-size: 2.25rem;
-	color: white;
-}
-
-.nav-link {
-	font-size: 1.25rem;
-	color: white;
-}
-/* header */
-.logo-main {
-	font-size: 3.25rem;
-	color: black;
-	text-align: center;
-}
+	/* nav-bar */
+	.bg-uos {
+		background-color: rgb(10, 77, 155);
+	}
+	
+	.logo {
+		font-size: 2.25rem;
+		color: white;
+	}
+	.nav-link {
+		font-size: 1.25rem;
+		color: white;
+	}
+	/* header */
+	.logo-main {
+		font-size: 3.25rem;
+		color: black;
+		text-align: center;
+	}
 </style>
 </head>
 
@@ -81,7 +86,7 @@
 	<!-- Page Content -->
 	<div class="container">
 		<form action="post">
-
+			<input type="hidden" name="userID" value="<%=userID %>"/>
 			<!-- Page Heading/Breadcrumbs -->
 			<br>
 			<h1 class="mt-4 mb-3">족보 / 레포트 업로드</h1>
@@ -107,10 +112,14 @@
 
 					<!-- Comments Form -->
 					<div class="card my-4">
-						<h5 class="card-header">Title</h5>
+						<h5 class="card-header">Title / Professor</h5>
 						<div class="card-body">							
 							<div class="form-group">
-								<input type="text" name="title">
+							<label for="reportTitle">제목 :</label>
+							<input type="text" name="reportTitle">
+							<br><hr>
+							<label for="price">가격 :</label>
+							<input type="text" name="price">원
 							</div>
 						</div>
 					</div>
