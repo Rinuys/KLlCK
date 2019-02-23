@@ -260,8 +260,8 @@ UserDAO emailCheckUserDAO = new UserDAO();
     <p class="card-text" style="height:150px;overflow:auto"><%= board.getBoardContent() %>.</p>
      <br>
      	<div class="card-footer">
-            <%if(userID != null){ %>
-				<a class="btn btn-success<%if(userID == null){ %> disabled <% } %>" href="./likeAction.jsp?userID=<%=URLEncoder.encode(userID, "UTF-8")%>&boardIndex=<%=board.getBoardIndex()%>">추천수 : <%=likeDAO.likeCount(Integer.toString(board.getBoardIndex())) %></a>
+				<a class="btn btn-success<%if(userID == null){ %> disabled" <% }else{ %>" href="./likeAction.jsp?userID=<%=URLEncoder.encode(userID, "UTF-8")%>&boardIndex=<%=board.getBoardIndex()%><%}%>">추천수 : <%=likeDAO.likeCount(Integer.toString(board.getBoardIndex())) %></a>
+			<%if(userID != null){ %>
 			<%if(userID.equals(board.getUserID())){ %>
 				<a class="btn btn-danger" onclick="return confirm('삭제하시겠습니까?')" href="./deleteAction.jsp?userID=<%=URLEncoder.encode(userID, "UTF-8")%>&boardIndex=<%=board.getBoardIndex()%>">삭제</a>
 			<%	
