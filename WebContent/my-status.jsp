@@ -136,9 +136,9 @@ UserDAO emailCheckUserDAO = new UserDAO();
 			<!-- Sidebar Column -->
 			<div class="col-lg-3 mb-4">
 				<div class="list-group">
-					<a href="my-status.html" class="list-group-item">내 정보</a> <a
-						href="status-modify.html" class="list-group-item">내 정보 변경</a> <a
-						href="subscribe.html" class="list-group-item">구독 내역</a>
+					<a href="my-status.jsp" class="list-group-item">내 정보</a> <a
+						href="status-modify.jsp" class="list-group-item">내 정보 변경</a> <a
+						href="subscribe.jsp" class="list-group-item">구독 내역</a>
 				</div>
 			</div>
 			<!-- Content Column -->

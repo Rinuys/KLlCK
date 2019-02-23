@@ -144,4 +144,74 @@ public class UserDAO {
 		}
 		return false;
 	}
+	//닉네임으로 아이디얻기
+	public String getUserID(String userNick) {
+		String SQL = "SELECT userID FROM user WHERE userNick=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1,  Integer.parseInt(userNick));
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{if(conn != null) conn.close();}catch(Exception e) {}
+			try{if(pstmt != null) pstmt.close();}catch(Exception e) {}
+			try{if(rs!= null) rs.close();}catch(Exception e) {}
+		}
+		return null;//데이터베이스오류
+	}
+	//아이디로 닉네임얻기
+	public String getUserNick(String userID) {
+		String SQL = "SELECT userNick FROM user WHERE userID=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userID);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{if(conn != null) conn.close();}catch(Exception e) {}
+			try{if(pstmt != null) pstmt.close();}catch(Exception e) {}
+			try{if(rs!= null) rs.close();}catch(Exception e) {}
+		}
+		return null;//데이터베이스오류
+	}
+	//user정보변경하기
+	public int statusModify(String userID, String newUserID, String newUserEmail, String newUserNick){
+		String SQL = "UPDATE user SET userID = ?, userEmail = ?, userNick = ? where userID= ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, newUserID);
+			pstmt.setString(2, newUserEmail);
+			pstmt.setString(3, newUserNick);
+			pstmt.setString(4, userID);
+			pstmt.executeUpdate();
+			return 1;//성공
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{if(conn != null) conn.close();}catch(Exception e) {}
+			try{if(pstmt != null) pstmt.close();}catch(Exception e) {}
+			try{if(rs!= null) rs.close();}catch(Exception e) {}
+		}
+		return -1;//중복이메일
+	}
 }

@@ -1,3 +1,5 @@
+<%@page import="java.io.PrintWriter"%>
+<%@page import="user.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.DriverManager" %>
@@ -7,40 +9,19 @@
 <%@ page import="java.sql.ResultSet" %>
 
 <%
-	String url = "jdbc:mysql://210.89.191.71:3306/KLlCK";
-	// 리눅스 서버의 mariadb에 연결하겠다. 따라서 localhost가 아니라 리눅스의 ip주소를 입력해야 한다.
-	String user = "root";
-	String password = "kllck";
-	
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	
-	StringBuffer result = new StringBuffer();
-	try{
-		Class.forName("org.mariadb.jdbc.Driver");
-		result.append("드라이버 로딩 성공");
-		
-		conn = DriverManager.getConnection(url,user,password);
-		result.append("드라이버 연결 성공");
-		
- 		String sql = "select userId, userPassword,userEmail,userAccount from user = ?";
-		
-		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
-		
-		if(rs.next()){
-			String userId = rs.getString("userId");
-			String userPassword = rs.getString("userPassword");
-			String userEmail = rs.getString("userEmail");
-			String userAccount = rs.getString("userAccount");
-		}
-	} catch(ClassNotFoundException e){
-		System.out.println("[에러] : " + e.getMessage());
-	} catch(SQLException e){
-		System.out.println("[에러] : " + e.getMessage());
-	} finally{
-		if(conn!=null) try {conn.close();} catch(SQLException e){}
+	String userID = null;
+
+	if(session.getAttribute("userID") != null){
+		userID = (String)session.getAttribute("userID");
+	}
+	if(userID == null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인을 해주세요.');");
+		script.println("location.href = 'login.jsp';");
+		script.println("</script>");
+		script.close();
+		return;
 	}
 %>
 <!DOCTYPE html>
@@ -53,7 +34,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Modern Business - Start Bootstrap Template</title>
+<title>KLlCK</title>
 
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -164,31 +145,26 @@ input>.my-status-content {
 					<a href="subscribe.jsp" class="list-group-item">구독 내역</a>
 				</div>
 			</div>
+			<%
+				UserDAO userDAO = new UserDAO();
+			%>
 			<!-- Content Column -->
 			<div class="col-lg-9 mb-4">
-				<form action="" class="my-status-form">
-					<h2 class="my-status-list">개인정보 변경</h2>
+				<form method="post" action="statusModifyAction.jsp" class="my-status-form">
+					<h2 class="my-status-list">개인정보 변경(변경할 정보를 입력하세요)</h2>
 					<p class="my-status-list">
-						<label for="name" class="my-status-title">사진</label> <input
-							type="file" name="name" class="my-status-content">
+						<label for="name" class="my-status-title">아이디</label> <input type="text" name="newUserID" value="<%=userID %>" class="my-status-content">
 					</p>
 					<p class="my-status-list">
-						<label for="name" class="my-status-title">닉네임</label> <input
-							type="text" name="name" value="강솔" class="my-status-content">
+						<label for="name" class="my-status-title">닉네임</label> <input type="text" name="newUserNick" value="<%=userDAO.getUserNick(userID) %>" class="my-status-content">
 					</p>
 					<p class="my-status-list">
-						<label for="mail" class="my-status-title">이메일</label> <input
-							type="text" name="mail" value="웹메일" class="my-status-content">
-					</p>
-					<p class="my-status-list">
-						<label for="major" class="my-status-title">학과</label> <input
-							type="text" name="major" value="영어영문학과" class="my-status-content">
+						<label for="mail" class="my-status-title">이메일</label> <input type="text" name="newUserEmail" value="<%=userDAO.getUserEmail(userID) %>" class="my-status-content">
 					</p>
 					<div class="my-status-list">
-						<div class="my-status-title">사진</div>
-						<div class="my-status-content my-status-img">
-							<img src="https://cf-fpi.everytime.kr/0.png" alt="">
-						</div>
+						<button type="submit" class="btn btn-primary ml-1">변경하기</button>
+						<a type="button" class="btn btn-secondary ml-1"
+							href="index.jsp">메인으로 돌아가기</a>
 					</div>
 				</form>
 
