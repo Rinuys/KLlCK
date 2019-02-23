@@ -94,19 +94,6 @@ UserDAO emailCheckUserDAO = new UserDAO();
           <li class="nav-item">
             <a class="nav-link" href="board.jsp">게시판</a>
           </li>
-          <%
-          	if(userID == null){
-          		
-          %>
-          <li class="nav-item">
-            <a class="nav-link" href="login.jsp">로그인</a>
-          </li>
-          <li class="nav-item">
-          	<a class="nav-link" href="sign-up.jsp">회원가입</a>
-          </li>
-          <%
-          	}else{
-          %>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -125,13 +112,13 @@ UserDAO emailCheckUserDAO = new UserDAO();
 						<a class="dropdown-item" href="userLogoutAction.jsp">로그아웃</a>
 				</div>
 			</li>
-			<%
-          	}
-			%>
 			</ul>
 		</div>
     </div>
   </nav>
+  <%
+  UserDAO userDAO = new UserDAO();
+  %>
 	<!-- Page Content -->
 	<div class="container">
 
@@ -158,22 +145,16 @@ UserDAO emailCheckUserDAO = new UserDAO();
 			<div class="col-lg-9 mb-4">
 				<h2 class="my-status-list">기본 정보</h2>
 				<div class="my-status-list">
-					<div class="my-status-title">사진</div>
-					<div class="my-status-content my-status-img">
-						<img src="https://cf-fpi.everytime.kr/0.png" alt="">
-					</div>
+					<div class="my-status-title">아이디</div>
+					<div class="my-status-content"><%=userID%></div>
 				</div>
 				<div class="my-status-list">
 					<div class="my-status-title">닉네임</div>
-					<div class="my-status-content">강솔</div>
+					<div class="my-status-content"><%=userDAO.getUserNick(userID) %></div>
 				</div>
 				<div class="my-status-list">
-					<div class="my-status-title mr-3">학과</div>
-					<div class="my-status-content">영어영문학과</div>
-				</div>
-				<div class="my-status-list">
-					<div class="my-status-title">웹메일</div>
-					<div class="my-status-content">영어영문학과</div>
+					<div class="my-status-title">메일</div>
+					<div class="my-status-content"><%=userDAO.getUserEmail(userID) %></div>
 				</div>
 			</div>
 		</div>

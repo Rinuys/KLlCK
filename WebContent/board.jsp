@@ -293,9 +293,10 @@ UserDAO emailCheckUserDAO = new UserDAO();
 			}
 		%>
 		</li>
+		<li class="mt-2"><b>&nbsp;&nbsp;-<%=pageNumber + 1%>page-&nbsp;&nbsp;</b></li>
 		<li class="page-item">
 		<%
-			if(boardList.size() < 6){
+			if(boardList.size() < 10){
 		%>
 			<a class="page-link disabled">다음</a>
 		<%
