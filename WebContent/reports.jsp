@@ -1,8 +1,8 @@
 <%@page import="user.UserDAO"%>
 <%@page import="user.UserDTO"%>
 <%@page import="board.BoardDAO"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -23,7 +23,7 @@
   </head>
   
   <body>
-<!-- ·Î±×ÀÎ À¯¹« È®ÀÎ -->
+<!-- ë¡œê·¸ì¸ ìœ ë¬´ í™•ì¸ -->
 <%
 	request.setCharacterEncoding("UTF-8");
 	String userID = null;
@@ -44,28 +44,28 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <%if(userID != null){ %>
-      <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>´Ô ¾È³çÇÏ¼¼¿ä!</label>
+      <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>ë‹˜ ì•ˆë…•í•˜ì„¸ìš”!</label>
       <%} %>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="class-evaluate.jsp">°­ÀÇÆò</a>
+            <a class="nav-link" href="class-evaluate.jsp">ê°•ì˜í‰</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="reports.jsp">Á·º¸ / ·¹Æ÷Æ®</a>
+            <a class="nav-link" href="reports.jsp">ì¡±ë³´ / ë ˆí¬íŠ¸</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="board.jsp">°Ô½ÃÆÇ</a>
+            <a class="nav-link" href="board.jsp">ê²Œì‹œíŒ</a>
           </li>
           <%
           	if(userID == null){
           		
           %>
           <li class="nav-item">
-            <a class="nav-link" href="login.jsp">·Î±×ÀÎ</a>
+            <a class="nav-link" href="login.jsp">ë¡œê·¸ì¸</a>
           </li>
           <li class="nav-item">
-          	<a class="nav-link" href="sign-up.jsp">È¸¿ø°¡ÀÔ</a>
+          	<a class="nav-link" href="sign-up.jsp">íšŒì›ê°€ìž…</a>
           </li>
           <%
           	}else{
@@ -75,17 +75,17 @@
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						MY Page </a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-						<a class="dropdown-item" href="my-status.jsp">³» Á¤º¸</a> 
-						<a class="dropdown-item" href="status-modify.jsp">³» Á¤º¸ º¯°æ</a> 
-						<a class="dropdown-item" href="subscribe.jsp">±¸µ¶ ³»¿ª</a>
+						<a class="dropdown-item" href="my-status.jsp">ë‚´ ì •ë³´</a> 
+						<a class="dropdown-item" href="status-modify.jsp">ë‚´ ì •ë³´ ë³€ê²½</a> 
+						<a class="dropdown-item" href="subscribe.jsp">êµ¬ë… ë‚´ì—­</a>
 						<%
 						if(!emailCheckUserDAO.getUserEmailChecked(userID)){
 						%>
-						<a class="dropdown-item" href="emailSendAction.jsp">ÀÌ¸ÞÀÏ ÀÎÁõÇÏ±â</a>
+						<a class="dropdown-item" href="emailSendAction.jsp">ì´ë©”ì¼ ì¸ì¦í•˜ê¸°</a>
 						<%
 						}
 						%>
-						<a class="dropdown-item" href="userLogoutAction.jsp">·Î±×¾Æ¿ô</a>
+						<a class="dropdown-item" href="userLogoutAction.jsp">ë¡œê·¸ì•„ì›ƒ</a>
 				</div>
 			</li>
 			<%
@@ -101,17 +101,17 @@
   
       <!-- Page Heading/Breadcrumbs -->
       <br>
-      <h1 class="mt-4 mb-3">Á·º¸ / ·¹Æ÷Æ® 
+      <h1 class="mt-4 mb-3">ì¡±ë³´ / ë ˆí¬íŠ¸ 
       </h1>
   
       <ol class="breadcrumb">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ¼±ÅÃ
+            ì„ íƒ
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-            <a class="dropdown-item" href="test.jsp">Á·º¸</a>
-            <a class="dropdown-item" href="reports.jsp">·¹Æ÷Æ®</a>
+            <a class="dropdown-item" href="test.jsp">ì¡±ë³´</a>
+            <a class="dropdown-item" href="reports.jsp">ë ˆí¬íŠ¸</a>
           </div>
         </li>
       </ol>
@@ -250,11 +250,11 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  		<!-- Á¦ÀÌÄõ¸® ÀÚ¹Ù½ºÅ©¸³Æ® -->
+  		<!-- ì œì´ì¿¼ë¦¬ ìžë°”ìŠ¤í¬ë¦½íŠ¸ -->
 	<script src="./js/jquery.min.js"></script>
-		<!-- ÆÄÆÛ ÀÚ¹Ù½ºÅ©¸³Æ® -->
+		<!-- íŒŒí¼ ìžë°”ìŠ¤í¬ë¦½íŠ¸ -->
 	<script src="./js/pooper.min.js"></script>
-		<!-- ºÎÆ®½ºÆ®·¦ ÀÚ¹Ù½ºÅ©¸³Æ® -->
+		<!-- ë¶€íŠ¸ìŠ¤íŠ¸ëž© ìžë°”ìŠ¤í¬ë¦½íŠ¸ -->
 	<script src="./js/bootstrap.min.js"></script>
   </body>
   

@@ -12,8 +12,8 @@
 <%@page import="user.UserDAO"%>
 <%@page import="util.SHA256"%>
 <%@page import="util.Gmail"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <% 
 	UserDAO userDAO = new UserDAO();
 	String userID = null;
@@ -23,7 +23,7 @@
 	if(userID == null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('·Î±×ÀÎÀ» ÇØÁÖ¼¼¿ä.');");
+		script.println("alert('ë¡œê·¸ì¸ì„ í•´ì£¼ì„¸ìš”.');");
 		script.println("location.href = 'login.jsp';");
 		script.println("</script>");
 		script.close();
@@ -33,7 +33,7 @@
 	if(emailChecked){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('ÀÌ¹Ì ÀÎÁõµÈ È¸¿øÀÔ´Ï´Ù.');");
+		script.println("alert('ì´ë¯¸ ì¸ì¦ëœ íšŒì›ì…ë‹ˆë‹¤.');");
 		script.println("location.href = 'index.jsp';");
 		script.println("</script>");
 		script.close();
@@ -43,8 +43,8 @@
 	String host = "http://210.89.191.71:8080/KLlCK/";
 	String from = "KLlCK.tomak0@gmail.com";
 	String to = userDAO.getUserEmail(userID);
-	String subject = "°­ÀÇÆò°¡¸¦ À§ÇÑ ÀÌ¸ŞÀÏ ÀÎÁõ¸ŞÀÏÀÔ´Ï´Ù.";
-	String content = "´ÙÀ½ ¸µÅ©¿¡ Á¢¼ÓÇÏ¿© ÀÌ¸ŞÀÏ ÀÎÁõÀ» ÁøÇàÇÏ¼¼¿ä." + "<a href='" + host + "emailCheckAction.jsp?code=" + new SHA256().getSHA256(to) + "'>ÀÌ¸ŞÀÏ ÀÎÁõÇÏ±â</a>";
+	String subject = "ê°•ì˜í‰ê°€ë¥¼ ìœ„í•œ ì´ë©”ì¼ ì¸ì¦ë©”ì¼ì…ë‹ˆë‹¤.";
+	String content = "ë‹¤ìŒ ë§í¬ì— ì ‘ì†í•˜ì—¬ ì´ë©”ì¼ ì¸ì¦ì„ ì§„í–‰í•˜ì„¸ìš”." + "<a href='" + host + "emailCheckAction.jsp?code=" + new SHA256().getSHA256(to) + "'>ì´ë©”ì¼ ì¸ì¦í•˜ê¸°</a>";
 	Properties p =new Properties();
 	p.put("mail.smtp.user", from);
 	p.put("mail.smtp.host", "smtp.googlemail.com");
@@ -72,7 +72,7 @@
 			e.printStackTrace();
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.');");
+			script.println("alert('ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.');");
 			script.println("history.back();");
 			script.println("</script>");
 			script.close();
@@ -85,10 +85,10 @@
 <head>
 	<meta charset="EUC-KR">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>°­ÀÇÆò°¡ À¥ »çÀÌÆ®</title>
-	<!-- ºÎÆ®½ºÆ®·¦ cssÃß°¡ -->
+	<title>ê°•ì˜í‰ê°€ ì›¹ ì‚¬ì´íŠ¸</title>
+	<!-- ë¶€íŠ¸ìŠ¤íŠ¸ë© cssì¶”ê°€ -->
 	<link rel="stylesheet" href="./css/bootstrap.min.css">
-	<!-- Ä¿½ºÅÒcssÃß°¡ -->
+	<!-- ì»¤ìŠ¤í…€cssì¶”ê°€ -->
 	<link rel="stylesheet" href="./css/custom.css">
 </head>
 <body>
@@ -108,35 +108,35 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <%if(userID != null){ %>
-      <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>´Ô ¾È³çÇÏ¼¼¿ä!</label>
+      <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>ë‹˜ ì•ˆë…•í•˜ì„¸ìš”!</label>
       <%} %>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="class-evaluate.jsp">°­ÀÇÆò</a>
+            <a class="nav-link" href="class-evaluate.jsp">ê°•ì˜í‰</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="reports.jsp">Á·º¸ / ·¹Æ÷Æ®</a>
+            <a class="nav-link" href="reports.jsp">ì¡±ë³´ / ë ˆí¬íŠ¸</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="board.jsp">°Ô½ÃÆÇ</a>
+            <a class="nav-link" href="board.jsp">ê²Œì‹œíŒ</a>
           </li>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						MY Page </a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-						<a class="dropdown-item" href="my-status.jsp">³» Á¤º¸</a> 
-						<a class="dropdown-item" href="status-modify.jsp">³» Á¤º¸ º¯°æ</a> 
-						<a class="dropdown-item" href="subscribe.jsp">±¸µ¶ ³»¿ª</a>
+						<a class="dropdown-item" href="my-status.jsp">ë‚´ ì •ë³´</a> 
+						<a class="dropdown-item" href="status-modify.jsp">ë‚´ ì •ë³´ ë³€ê²½</a> 
+						<a class="dropdown-item" href="subscribe.jsp">êµ¬ë… ë‚´ì—­</a>
 						<%
 						if(!emailCheckUserDAO.getUserEmailChecked(userID)){
 						%>
-						<a class="dropdown-item" href="emailSendAction.jsp">ÀÌ¸ŞÀÏ ÀÎÁõÇÏ±â</a>
+						<a class="dropdown-item" href="emailSendAction.jsp">ì´ë©”ì¼ ì¸ì¦í•˜ê¸°</a>
 						<%
 						}
 						%>
-						<a class="dropdown-item" href="userLogoutAction.jsp">·Î±×¾Æ¿ô</a>
+						<a class="dropdown-item" href="userLogoutAction.jsp">ë¡œê·¸ì•„ì›ƒ</a>
 				</div>
 			</li>
 
@@ -148,7 +148,7 @@
   <header>
 	<section class="container mt-10" style="max-width:560px; margin-top: 150px;">
 		<div class="alert alert-success mt-3" role="alert">
-			ÀÌ¸ŞÀÏ ÁÖ¼Ò ÀÎÁõ ¸ŞÀÏÀÌ Àü¼ÛµÇ¾ú½À´Ï´Ù. È¸¿ø°¡ÀÔ½Ã ÀÔ·ÂÇß´ø ÀÌ¸ŞÀÏ¿¡ °¡¼­ È®ÀÎÇÏ¼¼¿ä.
+			ì´ë©”ì¼ ì£¼ì†Œ ì¸ì¦ ë©”ì¼ì´ ì „ì†¡ë˜ì—ˆìŠµë‹ˆë‹¤. íšŒì›ê°€ì…ì‹œ ì…ë ¥í–ˆë˜ ì´ë©”ì¼ì— ê°€ì„œ í™•ì¸í•˜ì„¸ìš”.
 		</div>
 	</section>
 	</header>

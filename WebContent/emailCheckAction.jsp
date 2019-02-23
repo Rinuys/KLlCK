@@ -1,8 +1,8 @@
 <%@page import="util.SHA256"%>
 <%@page import="user.UserDAO"%>
 <%@page import="java.io.PrintWriter"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <% 
 	request.setCharacterEncoding("UTF-8");
 	String code = null;
@@ -18,7 +18,7 @@
 	if(userID == null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('·Î±×ÀÎÀ» ÇØÁÖ¼¼¿ä.');");
+		script.println("alert('ë¡œê·¸ì¸ì„ í•´ì£¼ì„¸ìš”.');");
 		script.println("location.href='index.jsp';");
 		script.println("</script>");
 		script.close();
@@ -38,7 +38,7 @@
 	}else{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('À¯È¿ÇÏÁö ¾ÊÀº ÄÚµåÀÔ´Ï´Ù..');");
+		script.println("alert('ìœ íš¨í•˜ì§€ ì•Šì€ ì½”ë“œì…ë‹ˆë‹¤..');");
 		script.println("location.href='index.jsp';");
 		script.println("</script>");
 		script.close();

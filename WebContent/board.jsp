@@ -25,7 +25,7 @@
   <link href="css/custom.css" rel="stylesheet">
 <style>
 p {
-	margin: 20px 0px;
+	margin: 5px 0px;
 }
 </style>
 <style>
@@ -47,7 +47,7 @@ p {
     .card-body{
       display: flex;
       flex-direction: column;
-      height: 200px;
+      min-height: 250px;
     }
     .card-body-main{
       display:flex;
@@ -253,18 +253,19 @@ UserDAO emailCheckUserDAO = new UserDAO();
 <div class="card">
   <div class="card-header">
     <img class="card-profile" src="http://artzone.indiecolaj.com/images/24/dp.jpg" alt="">
-                <div class="card-writer"><%=boardDAO.getUserNick(board.getUserID())%></div>
+                <label><%=boardDAO.getUserNick(board.getUserID())%></label>
   </div>
   <div class="card-body">
-    <h5 class="card-title"><%=board.getBoardTitle() %></h5>
-    <p class="card-text"><%= board.getBoardContent() %>.</p>
+    <h6 class="card-title"><b><%=board.getBoardTitle() %></b></h6>
+    <p class="card-text" style="height:150px;overflow:auto"><%= board.getBoardContent() %>.</p>
      <br>
      	<div class="card-footer">
             <%if(userID != null){ %>
-				<a class="btn btn-success" href="./likeAction.jsp?userID=<%=URLEncoder.encode(userID, "UTF-8")%>&boardIndex=<%=board.getBoardIndex()%>">추천수 : <%=likeDAO.likeCount(Integer.toString(board.getBoardIndex())) %></a>
+				<a class="btn btn-success<%if(userID == null){ %> disabled <% } %>" href="./likeAction.jsp?userID=<%=URLEncoder.encode(userID, "UTF-8")%>&boardIndex=<%=board.getBoardIndex()%>">추천수 : <%=likeDAO.likeCount(Integer.toString(board.getBoardIndex())) %></a>
 			<%if(userID.equals(board.getUserID())){ %>
 				<a class="btn btn-danger" onclick="return confirm('삭제하시겠습니까?')" href="./deleteAction.jsp?userID=<%=URLEncoder.encode(userID, "UTF-8")%>&boardIndex=<%=board.getBoardIndex()%>">삭제</a>
-			<%	}
+			<%	
+			}
 				}
 			%>
 			</div>

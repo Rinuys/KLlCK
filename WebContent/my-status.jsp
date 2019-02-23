@@ -2,8 +2,8 @@
 <%@page import="user.UserDTO"%>
 <%@page import="board.BoardDAO"%>
 <%@page import="java.io.PrintWriter"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <head>
 
@@ -51,7 +51,7 @@
 </head>
 
 <body>
-<!-- ·Î±×ÀÎ À¯¹« È®ÀÎ -->
+<!-- ë¡œê·¸ì¸ ìœ ë¬´ í™•ì¸ -->
 <%
 	request.setCharacterEncoding("UTF-8");
 	String userID = null;
@@ -61,7 +61,7 @@
 	if(userID == null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('·Î±×ÀÎÀ» ÇØÁÖ¼¼¿ä.');");
+		script.println("alert('ë¡œê·¸ì¸ì„ í•´ì£¼ì„¸ìš”.');");
 		script.println("location.href='login.jsp';");
 		script.println("</script>");
 		script.close();
@@ -81,28 +81,28 @@ UserDAO emailCheckUserDAO = new UserDAO();
         <span class="navbar-toggler-icon"></span>
       </button>
       <%if(userID != null){ %>
-      <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>´Ô ¾È³çÇÏ¼¼¿ä!</label>
+      <label class="mt-3" style="color:white"><%=checkBoardDAO.getUserNick(userID) %>ë‹˜ ì•ˆë…•í•˜ì„¸ìš”!</label>
       <%} %>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="class-evaluate.jsp">°­ÀÇÆò</a>
+            <a class="nav-link" href="class-evaluate.jsp">ê°•ì˜í‰</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="reports.jsp">Á·º¸ / ·¹Æ÷Æ®</a>
+            <a class="nav-link" href="reports.jsp">ì¡±ë³´ / ë ˆí¬íŠ¸</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="board.jsp">°Ô½ÃÆÇ</a>
+            <a class="nav-link" href="board.jsp">ê²Œì‹œíŒ</a>
           </li>
           <%
           	if(userID == null){
           		
           %>
           <li class="nav-item">
-            <a class="nav-link" href="login.jsp">·Î±×ÀÎ</a>
+            <a class="nav-link" href="login.jsp">ë¡œê·¸ì¸</a>
           </li>
           <li class="nav-item">
-          	<a class="nav-link" href="sign-up.jsp">È¸¿ø°¡ÀÔ</a>
+          	<a class="nav-link" href="sign-up.jsp">íšŒì›ê°€ìž…</a>
           </li>
           <%
           	}else{
@@ -112,17 +112,17 @@ UserDAO emailCheckUserDAO = new UserDAO();
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						MY Page </a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-						<a class="dropdown-item" href="my-status.jsp">³» Á¤º¸</a> 
-						<a class="dropdown-item" href="status-modify.jsp">³» Á¤º¸ º¯°æ</a> 
-						<a class="dropdown-item" href="subscribe.jsp">±¸µ¶ ³»¿ª</a>
+						<a class="dropdown-item" href="my-status.jsp">ë‚´ ì •ë³´</a> 
+						<a class="dropdown-item" href="status-modify.jsp">ë‚´ ì •ë³´ ë³€ê²½</a> 
+						<a class="dropdown-item" href="subscribe.jsp">êµ¬ë… ë‚´ì—­</a>
 						<%
 						if(!emailCheckUserDAO.getUserEmailChecked(userID)){
 						%>
-						<a class="dropdown-item" href="emailSendAction.jsp">ÀÌ¸ÞÀÏ ÀÎÁõÇÏ±â</a>
+						<a class="dropdown-item" href="emailSendAction.jsp">ì´ë©”ì¼ ì¸ì¦í•˜ê¸°</a>
 						<%
 						}
 						%>
-						<a class="dropdown-item" href="userLogoutAction.jsp">·Î±×¾Æ¿ô</a>
+						<a class="dropdown-item" href="userLogoutAction.jsp">ë¡œê·¸ì•„ì›ƒ</a>
 				</div>
 			</li>
 			<%
@@ -149,31 +149,31 @@ UserDAO emailCheckUserDAO = new UserDAO();
 			<!-- Sidebar Column -->
 			<div class="col-lg-3 mb-4">
 				<div class="list-group">
-					<a href="my-status.html" class="list-group-item">³» Á¤º¸</a> <a
-						href="status-modify.html" class="list-group-item">³» Á¤º¸ º¯°æ</a> <a
-						href="subscribe.html" class="list-group-item">±¸µ¶ ³»¿ª</a>
+					<a href="my-status.html" class="list-group-item">ë‚´ ì •ë³´</a> <a
+						href="status-modify.html" class="list-group-item">ë‚´ ì •ë³´ ë³€ê²½</a> <a
+						href="subscribe.html" class="list-group-item">êµ¬ë… ë‚´ì—­</a>
 				</div>
 			</div>
 			<!-- Content Column -->
 			<div class="col-lg-9 mb-4">
-				<h2 class="my-status-list">±âº» Á¤º¸</h2>
+				<h2 class="my-status-list">ê¸°ë³¸ ì •ë³´</h2>
 				<div class="my-status-list">
-					<div class="my-status-title">»çÁø</div>
+					<div class="my-status-title">ì‚¬ì§„</div>
 					<div class="my-status-content my-status-img">
 						<img src="https://cf-fpi.everytime.kr/0.png" alt="">
 					</div>
 				</div>
 				<div class="my-status-list">
-					<div class="my-status-title">´Ð³×ÀÓ</div>
-					<div class="my-status-content">°­¼Ö</div>
+					<div class="my-status-title">ë‹‰ë„¤ìž„</div>
+					<div class="my-status-content">ê°•ì†”</div>
 				</div>
 				<div class="my-status-list">
-					<div class="my-status-title mr-3">ÇÐ°ú</div>
-					<div class="my-status-content">¿µ¾î¿µ¹®ÇÐ°ú</div>
+					<div class="my-status-title mr-3">í•™ê³¼</div>
+					<div class="my-status-content">ì˜ì–´ì˜ë¬¸í•™ê³¼</div>
 				</div>
 				<div class="my-status-list">
-					<div class="my-status-title">À¥¸ÞÀÏ</div>
-					<div class="my-status-content">¿µ¾î¿µ¹®ÇÐ°ú</div>
+					<div class="my-status-title">ì›¹ë©”ì¼</div>
+					<div class="my-status-content">ì˜ì–´ì˜ë¬¸í•™ê³¼</div>
 				</div>
 			</div>
 		</div>

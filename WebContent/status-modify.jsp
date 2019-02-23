@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,22 +31,22 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-              <a class="nav-link" href="class-evaluate.jsp">°­ÀÇÆò</a>
+              <a class="nav-link" href="class-evaluate.jsp">ê°•ì˜í‰</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="reports.jsp">Á·º¸ / ·¹Æ÷Æ®</a>
+              <a class="nav-link" href="reports.jsp">ì¡±ë³´ / ë ˆí¬íŠ¸</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="board.jsp">°Ô½ÃÆÇ</a>
+            <a class="nav-link" href="board.jsp">ê²Œì‹œíŒ</a>
           </li>
           <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               MY Page
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="my-status.jsp">³» Á¤º¸</a>
-              <a class="dropdown-item" href="status-modify.jsp">³» Á¤º¸ º¯°æ</a>
-              <a class="dropdown-item" href="subscribe.jsp">±¸µ¶ ³»¿ª</a>
+              <a class="dropdown-item" href="my-status.jsp">ë‚´ ì •ë³´</a>
+              <a class="dropdown-item" href="status-modify.jsp">ë‚´ ì •ë³´ ë³€ê²½</a>
+              <a class="dropdown-item" href="subscribe.jsp">êµ¬ë… ë‚´ì—­</a>
              </div>
           </li>
         </ul>
@@ -69,9 +69,9 @@
       <!-- Sidebar Column -->
       <div class="col-lg-3 mb-4">
         <div class="list-group">
-            <a href="my-status.jsp" class="list-group-item">³» Á¤º¸</a>
-            <a href="status-modify.jsp" class="list-group-item">³» Á¤º¸ º¯°æ</a>
-            <a href="subscribe.jsp" class="list-group-item">±¸µ¶ ³»¿ª</a>       
+            <a href="my-status.jsp" class="list-group-item">ë‚´ ì •ë³´</a>
+            <a href="status-modify.jsp" class="list-group-item">ë‚´ ì •ë³´ ë³€ê²½</a>
+            <a href="subscribe.jsp" class="list-group-item">êµ¬ë… ë‚´ì—­</a>       
         </div>
       </div>
       <!-- Content Column -->
