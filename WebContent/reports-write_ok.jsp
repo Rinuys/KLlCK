@@ -19,27 +19,38 @@
 	// 리눅스 서버의 mariadb에 연결하겠다. 따라서 localhost가 아니라 리눅스의 ip주소를 입력해야 한다.
 	String user = "root";
 	String password = "kllck";
+	String reportIndex = "";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	String userID = request.getParameter("userID");
-	String price = request.getParameter("price");
-	String reportTitle = request.getParameter("reportTitle").replaceAll(" ", "");
-	String reportContent = request.getParameter("reportContent");
-	String professor = request.getParameter("professor");
-	String reportIP = request.getRemoteAddr();
-	String lectureIndex = "";
-	String reportFile = "";
 	
-	String uploadPath = "C:/Jaba/eclipse-workspace/Project/WebContent/upload";
+	String uploadPath = "C:/Java/eclipse-workspace/Project/WebContent/upload";
 	int maxFileSize = 1024 * 1024 * 10; // 10MB
 	String encType= "utf-8";
 	
 	MultipartRequest multi = new MultipartRequest(request, uploadPath, maxFileSize, encType, new DefaultFileRenamePolicy());
 	
-	reportFile = multi.getFilesystemName("upload"); // 중복처리된 파일명
+	String lecture = multi.getParameter("lecture");
+	String userID = multi.getParameter("userID");
+	String price = multi.getParameter("price");
+	String reportTitle = multi.getParameter("reportTitle");
+	String reportContent = multi.getParameter("reportContent");
+	String professor = multi.getParameter("professor");
+	String reportIP = "1.1.1.1";
+	String lectureIndex = "";
+	String reportFile = multi.getFilesystemName("report"); // 중복처리된 파일명
+	
+	System.out.println("lecture" + lecture);
+	System.out.println("userID" + userID);
+	System.out.println("price" + price);
+	System.out.println("reportTitle" + reportTitle);
+	System.out.println("reportContent" + reportContent);
+	System.out.println("professor" + professor);
+	System.out.println("reportIP" + reportIP);
+	System.out.println("reportFile" + reportFile);
+	
 	long filesize = 0;
 	File file = multi.getFile("upload");
 	if(file != null) {
@@ -57,19 +68,22 @@
 		conn = DriverManager.getConnection(url,user,password);
 		
  		String sql = "select lectureIndex from lecture"
- 				+ "where lectureName = 'IT관리론' and professor = '홍사능';";
+ 				+ " where lectureName = ? and professor = ?;";
 		
 		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, lecture);
+		pstmt.setString(2, professor);
 		rs = pstmt.executeQuery();
 		
 		if(rs.next()){
 			lectureIndex = rs.getString("lectureIndex");
 			
 			sql = "insert into reportBoard values(0,?,?,0,?,?,?,?,now(),?)";
+			//sql = "insert into reportBoard values(0, 1, 1000, 0, '중간고사', '중간고사 족보', 'id123', '000.000.000.000', now(), 'IT관리론 중간');";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, lectureIndex);
 			pstmt.setString(2, price);
-			pstmt.setString(3, reportTitle);
+			pstmt.setString(3, lecture);
 			pstmt.setString(4, reportContent);
 			pstmt.setString(5, userID);
 			pstmt.setString(6, reportIP);
@@ -78,9 +92,9 @@
 			
 			if(result == 1){
 				flag = 1;
-				System.out.println("reportBoard 테이블 데이터 쓰기 성공");
+				System.out.println("reportBoard1 테이블 데이터 쓰기 성공");
 			} else {
-				System.out.println("reportBoard 테이블 데이터 쓰기 실패");
+				System.out.println("reportBoard1 테이블 데이터 쓰기 실패");
 				flag = 0;
 			}
 			
@@ -92,10 +106,10 @@
 			result = pstmt.executeUpdate();
 			if(result == 1){
 				flag = 1;
-				System.out.println("lecture 테이블 데이터 쓰기 성공");
+				System.out.println("lecture1 테이블 데이터 쓰기 성공");
 			} else {
 				flag = 0;
-				System.out.println("lecture 테이블 데이터 쓰기 실패");
+				System.out.println("lecture1 테이블 데이터 쓰기 실패");
 			}
 			
 			sql = "select max(lectureIndex) lectureIndex from lecture";
@@ -116,13 +130,22 @@
 				result = pstmt.executeUpdate();
 				if(result == 1){
 					flag = 1;
-					System.out.println("reportBoard 테이블 데이터 쓰기 성공");
+					System.out.println("reportBoard2 테이블 데이터 쓰기 성공");
 				} else {
 					flag = 0;
-					System.out.println("reportBoard 테이블 데이터 쓰기 실패");
+					System.out.println("reportBoard2 테이블 데이터 쓰기 실패");
 				}
 			}
 		}
+		
+		sql = "select max(reportIndex) reportIndex from reportBoard";
+		
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();		
+		if(rs.next()){
+			reportIndex = rs.getString("reportIndex");
+		}
+		
 	} catch(ClassNotFoundException e){
 		System.out.println("[에러] : " + e.getMessage());
 	} catch(SQLException e){
@@ -131,14 +154,55 @@
 		if(conn!=null) try {conn.close();} catch(SQLException e){}
 		if(pstmt!=null) try {pstmt.close();} catch(SQLException e){}
 	}
-	
-	out.println("<script type='text/javascript'>");
-	if(flag == 0){
-		out.println("alert('글쓰기에 성공했습니다.');");
-		out.println("location.href='reports.jsp';"); //list로 이동
-	} else{
-		out.println("alert('글쓰기에 실패했습니다.');");
-		out.println("history.back();"); //뒤로 가기
-	}
-	out.println("</script>");
 %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Modern Business - Start Bootstrap Template</title>
+<link rel="stylesheet" href="./css/base/jquery-ui.css">
+
+<script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery-ui.js"></script>
+<!-- Custom styles for this template -->
+<script type="text/javascript">
+    $(document).ready(function() {
+	 	var commoditySend = function(){	
+	    	$.ajax({
+	    		url: 'http://172.30.1.18:13000/api/org.uos.kllck.Commodity',
+	    		type: 'post',
+	    		dataType: 'json',
+	    		data:{
+	    			$class: "org.uos.kllck.Commodity",
+	    			commodityId: $('#commodityId').val(),
+	    			hashValue: "hohohoooo",
+	    			keyValue: "123hoho123hoho",
+	    			price: $('#price').val(),
+	    			owner: "resource:org.uos.kllck.Student#0001"
+	    		},
+	    		success: function(){
+	    			alert("성공");
+	    		},
+	    		error: function(){
+	    			alert($('#price').val());
+	    			alert($('#commodityId').val());
+	    		}
+	    	});   
+	 	}
+	 	commoditySend();
+	 	
+	 	$('#submit1').button();
+    });
+</script>
+</head>
+<body>
+	<input type="hidden" id="price" name="price" value="<%=price%>">
+	<input type="hidden" id="commodityId" name="commodityId" value="<%=reportIndex%>">
+	<a id="submit1" href="reports.jsp">게시판으로 돌아가기</a>
+</body>
+</html>

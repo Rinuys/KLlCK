@@ -3,10 +3,12 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String userID = null;
-		
-	if(session.getAttribute("userID") != null){
+	
+	userID = "user123";
+	/* if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
-	}
+	} */
+		
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +47,13 @@
 		text-align: center;
 	}
 </style>
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById('submit1').onclick = function() {
+			document.frm.submit();
+		};
+	};
+</script>
 </head>
 
 <body>
@@ -85,7 +94,7 @@
 
 	<!-- Page Content -->
 	<div class="container">
-		<form action="post">
+		<form action="reports-write_ok.jsp" method="post" name="frm" enctype="multipart/form-data">
 			<input type="hidden" name="userID" value="<%=userID %>"/>
 			<!-- Page Heading/Breadcrumbs -->
 			<br>
@@ -93,10 +102,13 @@
 
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">
-				<label for="class">과목명 : </label> 
-				<input type="text" name="class"></li>
+					<label for="class">과목명 : </label> 
+					<input type="text" name="lecture">
+				</li>
 				<li class="breadcrumb-item active">
-				<label for="professor">교수명	: </label> <input type="text" name="professor"></li>
+					<label for="professor">교수명	: </label> 
+					<input type="text" name="professor">
+				</li>
 			</ol>
 
 			<div class="row">
@@ -127,12 +139,12 @@
 						<h5 class="card-header">Leave a Comment</h5>
 						<div class="card-body">
 							<div class="form-group">
-								<textarea class="form-control" rows="10"></textarea>
+								<textarea name="reportContent" class="form-control" rows="10"></textarea>
 							</div>
 						</div>
 					</div>
 
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" id="submit1" class="btn btn-primary">Submit</button>
 				<br><br>
 				</div>
 
