@@ -1,161 +1,144 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 
-<head>
+<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
+<%@ page import="com.oreilly.servlet.MultipartRequest" %>
 
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<title>Modern Business - Start Bootstrap Template</title>
-
-<!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="css/modern-business.css" rel="stylesheet">
-<style>
-/* nav-bar */
-.bg-uos {
-	background-color: rgb(10, 77, 155);
-}
-
-.logo {
-	font-size: 2.25rem;
-	color: white;
-}
-
-.nav-link {
-	font-size: 1.25rem;
-	color: white;
-}
-/* header */
-.logo-main {
-	font-size: 3.25rem;
-	color: black;
-	text-align: center;
-}
-</style>
-</head>
-
-<body>
-
-	<!-- Navigation -->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-uos fixed-top">
-		<div class="container">
-			<a class="navbar-brand logo" href="index.html">KLlCK</a>
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link"
-						href="class-evaluate.html">강의평</a></li>
-					<li class="nav-item"><a class="nav-link" href="reports.html">족보
-							/ 레포트</a></li>
-					<li class="nav-item"><a class="nav-link" href="board.html">게시판</a>
-					</li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							MY Page </a>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="my-status.html">내 정보</a> <a
-								class="dropdown-item" href="status-modify.html">내 정보 변경</a> <a
-								class="dropdown-item" href="subscribe.html">구독 내역</a>
-						</div></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<!-- Page Content -->
-	<div class="container">
-		<form action="post">
-
-			<!-- Page Heading/Breadcrumbs -->
-			<br>
-			<h1 class="mt-4 mb-3">족보 / 레포트 업로드</h1>
-
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><label for="class">과목명 : </label> <input
-					type="text" name="class"></li>
-				<li class="breadcrumb-item active"><label for="professor">교수명
-						: </label> <input type="text" name="professor"></li>
-			</ol>
-
-			<div class="row">
-
-				<!-- Post Content Column -->
-				<div class="col-lg-8">
-
-					<!-- Preview Image -->
-					<input type="file" name="report">
-					<hr>
-
-					<!-- Post Content -->
-
-					<!-- Comments Form -->
-					<div class="card my-4">
-						<h5 class="card-header">Leave a Comment:</h5>
-						<div class="card-body">
-							<div class="form-group">
-								<textarea class="form-control" rows="10"></textarea>
-							</div>
-						</div>
-					</div>
+<%@ page import="java.io.File" %>
 
 
-				</div>
+<%
+	request.setCharacterEncoding("utf-8");
+	
+	String url = "jdbc:mysql://210.89.191.71:3306/KLlCK";
+	// 리눅스 서버의 mariadb에 연결하겠다. 따라서 localhost가 아니라 리눅스의 ip주소를 입력해야 한다.
+	String user = "root";
+	String password = "kllck";
+	
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	String userID = request.getParameter("userID");
+	String price = request.getParameter("price");
+	String reportTitle = request.getParameter("reportTitle").replaceAll(" ", "");
+	String reportContent = request.getParameter("reportContent");
+	String professor = request.getParameter("professor");
+	String reportIP = request.getRemoteAddr();
+	String lectureIndex = "";
+	String reportFile = "";
+	
+	String uploadPath = "C:/Jaba/eclipse-workspace/Project/WebContent/upload";
+	int maxFileSize = 1024 * 1024 * 10; // 10MB
+	String encType= "utf-8";
+	
+	MultipartRequest multi = new MultipartRequest(request, uploadPath, maxFileSize, encType, new DefaultFileRenamePolicy());
+	
+	reportFile = multi.getFilesystemName("upload"); // 중복처리된 파일명
+	long filesize = 0;
+	File file = multi.getFile("upload");
+	if(file != null) {
+		filesize = file.length();
+	}
 
-				<!-- Sidebar Widgets Column -->
-				<div class="col-md-4">
-
-					<!-- Search Widget -->
-					<div class="card mb-4">
-						<h5 class="card-header">해시태그</h5>
-						<div class="card-body">
-							<div class="input-group">
-								<div class="form-group">
-									<textarea class="form-control" rows="3"></textarea>
-								</div>
-								<button type="submit" class="btn btn-primary">Submit</button>
-							</div>
-						</div>
-					</div>
-
-
-
-				</div>
-
-			</div>
-			<!-- /.row -->
-		</form>
-	</div>
-	<!-- /.container -->
-
-	<!-- Footer -->
-	<footer class="py-5 bg-uos">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
-				Website 2019</p>
-		</div>
-		<!-- /.container -->
-	</footer>
-
-	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+	int result = 0;
+	int flag = 2;
+	//flag
+	//0 - 실패
+	//1 - 성공
+	try{
+		Class.forName("org.mariadb.jdbc.Driver");
+		
+		conn = DriverManager.getConnection(url,user,password);
+		
+ 		String sql = "select lectureIndex from lecture"
+ 				+ "where lectureName = 'IT관리론' and professor = '홍사능';";
+		
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()){
+			lectureIndex = rs.getString("lectureIndex");
+			
+			sql = "insert into reportBoard values(0,?,?,0,?,?,?,?,now(),?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, lectureIndex);
+			pstmt.setString(2, price);
+			pstmt.setString(3, reportTitle);
+			pstmt.setString(4, reportContent);
+			pstmt.setString(5, userID);
+			pstmt.setString(6, reportIP);
+			pstmt.setString(7, reportFile);
+			result = pstmt.executeUpdate();
+			
+			if(result == 1){
+				flag = 1;
+				System.out.println("reportBoard 테이블 데이터 쓰기 성공");
+			} else {
+				System.out.println("reportBoard 테이블 데이터 쓰기 실패");
+				flag = 0;
+			}
+			
+		} else{
+			sql = "insert into lecture values(0, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, reportTitle);
+			pstmt.setString(2, professor);
+			result = pstmt.executeUpdate();
+			if(result == 1){
+				flag = 1;
+				System.out.println("lecture 테이블 데이터 쓰기 성공");
+			} else {
+				flag = 0;
+				System.out.println("lecture 테이블 데이터 쓰기 실패");
+			}
+			
+			sql = "select max(lectureIndex) lectureIndex from lecture";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				lectureIndex = rs.getString("lectureIndex");
+				sql = "insert into reportBoard values(0,?,?,0,?,?,?,?,now(),?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, lectureIndex);
+				pstmt.setString(2, price);
+				pstmt.setString(3, reportTitle);
+				pstmt.setString(4, reportContent);
+				pstmt.setString(5, userID);
+				pstmt.setString(6, reportIP);
+				pstmt.setString(7, reportFile);
+				result = pstmt.executeUpdate();
+				if(result == 1){
+					flag = 1;
+					System.out.println("reportBoard 테이블 데이터 쓰기 성공");
+				} else {
+					flag = 0;
+					System.out.println("reportBoard 테이블 데이터 쓰기 실패");
+				}
+			}
+		}
+	} catch(ClassNotFoundException e){
+		System.out.println("[에러] : " + e.getMessage());
+	} catch(SQLException e){
+		System.out.println("[에러] : " + e.getMessage());
+	} finally{
+		if(conn!=null) try {conn.close();} catch(SQLException e){}
+		if(pstmt!=null) try {pstmt.close();} catch(SQLException e){}
+	}
+	
+	out.println("<script type='text/javascript'>");
+	if(flag == 0){
+		out.println("alert('글쓰기에 성공했습니다.');");
+		out.println("location.href='reports.jsp';"); //list로 이동
+	} else{
+		out.println("alert('글쓰기에 실패했습니다.');");
+		out.println("history.back();"); //뒤로 가기
+	}
+	out.println("</script>");
+%>
