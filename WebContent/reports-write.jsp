@@ -87,10 +87,11 @@
 			<h1 class="mt-4 mb-3">족보 / 레포트 업로드</h1>
 
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><label for="class">과목명 : </label> <input
-					type="text" name="class"></li>
-				<li class="breadcrumb-item active"><label for="professor">교수명
-						: </label> <input type="text" name="professor"></li>
+				<li class="breadcrumb-item">
+				<label for="class">과목명 : </label> 
+				<input type="text" name="class"></li>
+				<li class="breadcrumb-item active">
+				<label for="professor">교수명	: </label> <input type="text" name="professor"></li>
 			</ol>
 
 			<div class="row">
@@ -106,7 +107,15 @@
 
 					<!-- Comments Form -->
 					<div class="card my-4">
-						<h5 class="card-header">Leave a Comment:</h5>
+						<h5 class="card-header">Title</h5>
+						<div class="card-body">							
+							<div class="form-group">
+								<input type="text" name="title">
+							</div>
+						</div>
+					</div>
+					<div class="card my-4">
+						<h5 class="card-header">Leave a Comment</h5>
 						<div class="card-body">
 							<div class="form-group">
 								<textarea class="form-control" rows="10"></textarea>
@@ -114,28 +123,10 @@
 						</div>
 					</div>
 
-
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<br><br>
 				</div>
 
-				<!-- Sidebar Widgets Column -->
-				<div class="col-md-4">
-
-					<!-- Search Widget -->
-					<div class="card mb-4">
-						<h5 class="card-header">해시태그</h5>
-						<div class="card-body">
-							<div class="input-group">
-								<div class="form-group">
-									<textarea class="form-control" rows="3"></textarea>
-								</div>
-								<button type="submit" class="btn btn-primary">Submit</button>
-							</div>
-						</div>
-					</div>
-
-
-
-				</div>
 
 			</div>
 			<!-- /.row -->

@@ -1,4 +1,4 @@
-<%@page import="board.BoardDAO"%>
+﻿<%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -127,7 +127,7 @@
 			</div>
 
 			<div class="card">
-				<div class="card-header" role="tab" id="headingTwo">
+				<div class="card-header" role="tab" id="headingone">
 					<h5 class="mb-0">
 						<a class="collapsed" data-toggle="collapse"
 							data-parent="#accordion" href="#collapseTwo"
